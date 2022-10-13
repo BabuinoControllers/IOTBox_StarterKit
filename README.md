@@ -24,6 +24,21 @@ Most IOT projects fails for many reasons:
 
 On the other side most of IOT projects share common requirements. IOT Brick technology try to share development, implementation and industrialization efforts of one projects with others by providing a general purpose device covering a wide range of applciations that can be simply integrated in complex IOT architecture.
 
+## From Development to configuration
+Application logic can be easily implemented by configuring and combining the functional blocks into the device. Functional blocks are studied to support the implementation of a wide range of use cases and applications. Functional blocks have inputs and outputs. Logic is created by instantiating a functional block and connecting the output of a functional block to the input of the others. Several types of functional blocks are available. Follow a short summary:
+
+- Sensor block: used to read the value of an input or an output of the board or of others functional block. Input can be configured to read analog values (only from board input) and can implement a Schmitt Trigger whose thresholds are fully configurable. Sensor blocks can also be read remotely by users.
+
+- Switch block: it is a switch that can be controlled remotely by user. It can be configured as monostable (pulse) or bistable (on/off or toggle). Activation of the switch is conditional to a weekly time policy defined by administrator.
+
+- Door block: it is like a switch block but connected to relays driving device outputs. 
+ 
+- Mealy Machine: finite State Machine based on a Mealy model with max 8 inputs, 4 outputs and 16 states. Activity of the machine can be conditioned by means of a weekly time policy defined by administrator. Outputs of the block can change its status only if the weekly time policy reports that the machine is active.
+
+- Digital Function Block: implementing any combinatory logic on 4 inputs. Output can be configured as monostable (Pulse) or bistable. Moreover, transition from one logical level to the other can be delayed by configuring the function block. Block is active conditionally to a weekly timed policy.
+
+- Weekly policy block: It defines a weekly time policy. Time policy is regulated by real time clock (RTC) operating in the board. Some of the functional block activities are regulated by the weekly time policy. Access control policy has a validity time defined by a starting time and an expiration time. Group access policy can be defined per user.
+
 ## How to start
 Starter kit includes a project for NetBeans version 8.2. So install NetBeans version 8.2 before starting.
 After just clone locally latest stable version of the Starter Kit Project, launch NetBeans and open the project.
@@ -37,6 +52,9 @@ Library as JAR file are in the library folder. Library provides a cohmprensive s
 To use the library in a new project just import the JAR file in the project and start developing code. Download the [JAR File from this link]()
 
 Java doc is available [here]().
+
+## Security
+Communication between devices and administrator/user entities is protected by end-to-end security. Communication protocol creates a secure tunnel between users and Iot Brick that protect exchanged data guaranteeing authenticity confidentiality and integrity. User are authenticated at each and every command by the end-to-end protocol. For some specific commands it is possible to enforce an additional level of user authentication through a PIN.
 
 ## Troubleshooting
 
