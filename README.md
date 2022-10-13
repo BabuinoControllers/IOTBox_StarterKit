@@ -13,7 +13,13 @@ Without any hardware development and firmware programming it is possible to impl
 IOT Brick is a connected object that can be controlled remotely by any device or application including app on smartphone or other smart devices. Each unit comes with six configurable inputs and four outputs. Input can be configured to be analog and digital. Number of inputs and outputs can be extended by connecting additional units via RS485 and Ethernet. To simplify the integration in operating environment and applications an SDK (Software development kit) for desktop, server and mobile (Android and IOS) is available. 
 IOTBricks logic can also be changed when the device is deployed on the field just by sendind the device the new configuration.
 To buy IOT Brick device [contact us](https://www.babuinocontrollers.com/contacts/).
-More details about IOT BRick - BR001 are in the [datesheet](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/20210929 BR001V1 - EN.pdf).
+More details about IOT BRick - BR001 are in the [datesheet](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/20210929_BR001V1_EN.pdf).
+
+<p align="center">
+  <br />
+  <img src="https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/IOT_Brick_BR001.jpg" width="300px" alt="IOT Brick - BR001" >
+  <br />
+</p>
 
 ## Why IOT Brick?
 Most IOT projects fails for many reasons: 
@@ -39,7 +45,7 @@ Application logic can be easily implemented by configuring and combining the fun
 
 - Weekly policy block: It defines a weekly time policy. Time policy is regulated by real time clock (RTC) operating in the board. Some of the functional block activities are regulated by the weekly time policy. Access control policy has a validity time defined by a starting time and an expiration time. Group access policy can be defined per user.
 
-<p align="left">
+<p align="center">
   <br />
   <img src="https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/IOT Brick Architecture.png" width="800px" alt="IOT Brick Architecture" >
   <br />
@@ -58,7 +64,7 @@ Device has a factory rest. Pressing reset button for more than 5s cause a system
 
 ## Library
 Library as JAR file are in the library folder. Library provides a cohmprensive set of objects that mirrors objects in the device. By interacting with these objects it is possible to interact remotely with the device.
-To use the library in a new project just import the JAR file in the project and start developing code. Download the [JAR File from this link](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/20210929 BR001V1 - EN.pdf)
+To use the library in a new project just import the JAR file in the project and start developing code. Download the [JAR File from this link](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/lib/SDK_IOTBrick.jar)
 
 Library can be easly included also in Android Projects. If you need library for IOS device please [reach out](https://www.babuinocontrollers.com/contacts/).
 
