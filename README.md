@@ -47,11 +47,26 @@ Note: it is not mandatory required that the device connect to the server. Device
 
 There is no need to configure any IP address. The device implements a discovery protocol that allow to discover devices connected to the network. Only configuration required is to copy in the main file the serial number of the device and the initial password of the device.
 
+## System Reset and Factory Reset
+Device has a factory rest. Pressing reset button for more than 5s cause a system reset. Pressing for more than 15s cause a factory reset. Factory reset delete all the information from the non-volatile memory of the device.
+
 ## Library
 Library as JAR file are in the library folder. Library provides a cohmprensive set of objects that mirrors objects in the device. By interacting with these objects it is possible to interact remotely with the device.
 To use the library in a new project just import the JAR file in the project and start developing code. Download the [JAR File from this link]()
 
 Java doc is available [here]().
+
+## Users
+Users can monitor remotely the application and perform actions. Before any command sent by user is executed user is authenticated. Only authenticated users can perform an action. User authentication is based on a key and additionally for some blocks like switch block or door block also by means of a PIN.
+Three different roles can be assigned to users:
+- Super Administrator with full access to all the features of the device including hardware
+settings and log analysis.
+
+- Administrator able to create, delete users and define access policies.
+
+- User allowed to open close the output based on the policy defined by the administrators.
+
+On average 250 users can be registered with the system, Effective number of users depends on the settings. Each user has its own key used to guarantee end to end security.
 
 ## Security
 Communication between devices and administrator/user entities is protected by end-to-end security. Communication protocol creates a secure tunnel between users and Iot Brick that protect exchanged data guaranteeing authenticity confidentiality and integrity. User are authenticated at each and every command by the end-to-end protocol. For some specific commands it is possible to enforce an additional level of user authentication through a PIN.
