@@ -13,7 +13,7 @@ Without any hardware development and firmware programming it is possible to impl
 IOT Brick is a connected object that can be controlled remotely by any device or application including app on smartphone or other smart devices. Each unit comes with six configurable inputs and four outputs. Input can be configured to be analog and digital. Number of inputs and outputs can be extended by connecting additional units via RS485 and Ethernet. To simplify the integration in operating environment and applications an SDK (Software development kit) for desktop, server and mobile (Android and IOS) is available. 
 IOTBricks logic can also be changed when the device is deployed on the field just by sendind the device the new configuration.
 To buy IOT Brick device [contact us](https://www.babuinocontrollers.com/contacts/).
-More details about IOT BRick - BR001 are in the [datesheet](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/javadoc.zip).
+More details about IOT BRick - BR001 are in the [datesheet](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/20210929 BR001V1 - EN.pdf).
 
 ## Why IOT Brick?
 Most IOT projects fails for many reasons: 
@@ -58,11 +58,11 @@ Device has a factory rest. Pressing reset button for more than 5s cause a system
 
 ## Library
 Library as JAR file are in the library folder. Library provides a cohmprensive set of objects that mirrors objects in the device. By interacting with these objects it is possible to interact remotely with the device.
-To use the library in a new project just import the JAR file in the project and start developing code. Download the [JAR File from this link]()
+To use the library in a new project just import the JAR file in the project and start developing code. Download the [JAR File from this link](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/20210929 BR001V1 - EN.pdf)
 
 Library can be easly included also in Android Projects. If you need library for IOS device please [reach out](https://www.babuinocontrollers.com/contacts/).
 
-Java doc is available [here]().
+Java doc is available [here](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/javadoc.zip).
 
 ## Users
 Users can monitor remotely the application and perform actions. Before any command sent by user is executed user is authenticated. Only authenticated users can perform an action. User authentication is based on a key and additionally for some blocks like switch block or door block also by means of a PIN.
