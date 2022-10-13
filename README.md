@@ -54,6 +54,8 @@ Device has a factory rest. Pressing reset button for more than 5s cause a system
 Library as JAR file are in the library folder. Library provides a cohmprensive set of objects that mirrors objects in the device. By interacting with these objects it is possible to interact remotely with the device.
 To use the library in a new project just import the JAR file in the project and start developing code. Download the [JAR File from this link]()
 
+Library can be easly included also in Android Projects. If you need library for IOS device please [reach out](https://www.babuinocontrollers.com/contacts/).
+
 Java doc is available [here]().
 
 ## Users
