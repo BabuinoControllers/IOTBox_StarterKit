@@ -13,7 +13,7 @@ Without any hardware development and firmware programming it is possible to impl
 IOT Brick is a connected object that can be controlled remotely by any device or application including app on smartphone or other smart devices. Each unit comes with six configurable inputs and four outputs. Input can be configured to be analog and digital. Number of inputs and outputs can be extended by connecting additional units via RS485 and Ethernet. To simplify the integration in operating environment and applications an SDK (Software development kit) for desktop, server and mobile (Android and IOS) is available. 
 IOTBricks logic can also be changed when the device is deployed on the field just by sendind the device the new configuration.
 To buy IOT Brick device [contact us](https://www.babuinocontrollers.com/contacts/).
-More details about IOT BRick - BR001 are in the [datesheet] ().
+More details about IOT BRick - BR001 are in the [datesheet](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/javadoc.zip).
 
 ## Why IOT Brick?
 Most IOT projects fails for many reasons: 
@@ -38,6 +38,12 @@ Application logic can be easily implemented by configuring and combining the fun
 - Digital Function Block: implementing any combinatory logic on 4 inputs. Output can be configured as monostable (Pulse) or bistable. Moreover, transition from one logical level to the other can be delayed by configuring the function block. Block is active conditionally to a weekly timed policy.
 
 - Weekly policy block: It defines a weekly time policy. Time policy is regulated by real time clock (RTC) operating in the board. Some of the functional block activities are regulated by the weekly time policy. Access control policy has a validity time defined by a starting time and an expiration time. Group access policy can be defined per user.
+
+<p align="left">
+  <br />
+  <img src="https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/IOT Brick Architecture.png" width="800px" alt="IOT Brick Architecture" >
+  <br />
+</p>
 
 ## How to start
 Starter kit includes a project for NetBeans version 8.2. So install NetBeans version 8.2 before starting.
