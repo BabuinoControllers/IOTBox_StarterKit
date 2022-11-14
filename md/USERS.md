@@ -1,19 +1,68 @@
-# IOT Brick Starter Kit
+# IOT Brick Users
 
-### The IOT solution ready when you are
+### The IOT solution that is ready when you are
 
 ---
 
-This is the starter kit of IOTBrick - BR001 the IOT solution that provides a general purpose secure unit usable in wide range of applications. Starter kit
-is designed for java applications and includes software libraries as JAR files that simplifies the communication and interaction with IOT Brick devices. It include alaso an example project, API specifications of the libriaries as a javadoc and a datasheet of IOTBrick - BR001.
+IOT Bricks Users are the entities that remotely create, manages and have access to device resources. Users can read a measure captured by a sensor and can activate or deactivate a switch as well.
 
-## About IOT Brick
+## Users Role
+Access to device resources is based on roles. There are three different roles for users.
+
+- Super Administrators
+- Administrators
+- Users
+
+Super Administrators have full access to device resources. Can instantiate or delete any object into the device including other users , digital function blocks and have the rights to define the application logic. Super administrators have full access to device settings. There is only one super administrator per device. Super administrator can create new users and define weekly policy.
+Super administrators can assign adimistrator priviledge to users and have full access to system logs.
+
+Device Administrators can create new users, change user properties, enable/disable users define weekly policies and associate to users and to switches. Administrators can not modify device setting and can not configure device logic.
+
+Users have access to resources like sensors or can control switches based on the policy defined by super administrators and adimistrators.
+
+When user is instantiated it is defined its role and an initial key.
+
+Examples
+```
+	User admin = new User(superA, User.USER_ROLE_ADMIN, "initial key");
+```	
+
+Remote application instantiate a new user in the device. User have the administrator role and the initial key as initial key
+
+```
+	Device thisDevice = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET, 3, 2000);
+	SuperA superA = new SuperA(RemoteAuthenticator.SUPERA_INITIAL_KEY, thisDevice);
+```
+
+Mirrors in the remote application the super administrator of the device. COnnection with the device is first established by the discovery procedure.
+
+```
+                        // object created
+                User user = new User(admin, User.USER_ROLE_USER, "rigqa");
+                user.updateKey("newSutta");
+                user.syncroFields(user);
+```
+New user instance is created on the device by the administrator user admin: admin is an object instance of an administrator.  First action user perform is update its key and syncronizing his fields.
+
+## Remote authentication
+Each time an user is created also other two objects are created and associated to user objects. They are the local administrator object and remote adinistrator object.
+Remote administrator object (RAO) is in charge of enforcing security in the communication. It stores the keys that enforces security over communication guaranteeing integrity of messages, confidentiality and authentication of origin.
+When user is created Administrators define an initial key used to iitially secure communication. Initial key is provided to users through a secure channel. User shall change the key at first access.
+Each device has a different initial key for the super administrator
+
+## Local Authenticator
+Local authenticator is in charge of user authentication through a PIN. Only user can set or change its own pin. Adminsitrator can unblock the pin in case it is blocked because retries due to wrong pin exceed maximum retries.
+
+
+
+
+
 IOT Brick - BR001 is a secure unit designed as general-purpose IOT device by [Babuino Controllers](https://babuinocontrollers.com) that simplifies the design, the implementation and the deployment of IOT solutions on the field minimizing the time to market. IOT Brick do not implement application logic. Application logic shall be configured according to the application requirements just by connecting together several functional blocks. Functional blocks are basic blocks that transform inputs into outputs following specific configurable function. Connecting togheter the input and the output of functional blocks it is ipossible to implement a wide range of application logic.
 Without any hardware development and firmware programming it is possible to implement a large variety of applications and use cases just configuring the functional blocks provided by the device. So, development moves from hardware and firmware development to logic configuration.
 IOT Brick is a connected object that can be controlled remotely by any device or application including app on smartphone or other smart devices. Each unit comes with six configurable inputs and four outputs. Input can be configured to be analog and digital. Number of inputs and outputs can be extended by connecting additional units via RS485 and Ethernet. To simplify the integration in operating environment and applications an SDK (Software development kit) for desktop, server and mobile (Android and IOS) is available. 
 IOTBricks logic can also be changed when the device is deployed on the field just by sendind the device the new configuration.
 To buy IOT Brick device [contact us](https://www.babuinocontrollers.com/contacts/).
-More details about IOT BRick - BR001 are in the [datesheet](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/20210929_BR001V1_EN.pdf).
+More details about IOT BRick - BR001 are in the [datesheet](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/20210929 BR001V1 - EN.pdf).
 
 ## Why IOT Brick?
 Most IOT projects fails for many reasons: 
@@ -75,8 +124,6 @@ settings and log analysis.
 - User allowed to open close the output based on the policy defined by the administrators.
 
 On average 250 users can be registered with the system, Effective number of users depends on the settings. Each user has its own key used to guarantee end to end security.
-
-[More about users](md/users.md)
 
 ## Security
 Communication between devices and administrator/user entities is protected by end-to-end security. Communication protocol creates a secure tunnel between users and Iot Brick that protect exchanged data guaranteeing authenticity confidentiality and integrity. User are authenticated at each and every command by the end-to-end protocol. For some specific commands it is possible to enforce an additional level of user authentication through a PIN.
