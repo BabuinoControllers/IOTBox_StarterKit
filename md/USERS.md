@@ -1,10 +1,10 @@
 # IOT Brick Users
 
-### The IOT solution that is ready when you are
+### Users remotly access to device resources
 
 ---
 
-IOT Bricks Users are the entities that remotely create, manages and have access to device resources. Users can read a measure captured by a sensor and can activate or deactivate a switch as well.
+IOT Bricks Users are the entities that remotely have access to device resources. Based on their role users can perform administrative actions like create new users, manages policies, assign rights, configure the device logic and delete objects instance on the device. Moreover Users can read a value measured by a sensor from an input and can activate or deactivate a switch.
 
 ## Users Role
 Access to device resources is based on roles. There are three different roles for users.
@@ -13,121 +13,83 @@ Access to device resources is based on roles. There are three different roles fo
 - Administrators
 - Users
 
-Super Administrators have full access to device resources. Can instantiate or delete any object into the device including other users , digital function blocks and have the rights to define the application logic. Super administrators have full access to device settings. There is only one super administrator per device. Super administrator can create new users and define weekly policy.
-Super administrators can assign adimistrator priviledge to users and have full access to system logs.
+Super Administrators have full access to device resources. Can instantiate or delete any object into the device including digital function blocks orother users and have the rights in order to configure device application logic. Super administrators have full access to device settings and system logs. Super administrator can create new users and define weekly policy. Super administrators can assign adimistrator priviledge to users and have full access to system logs. There is only one super administrator per device. 
 
-Device Administrators can create new users, change user properties, enable/disable users define weekly policies and associate to users and to switches. Administrators can not modify device setting and can not configure device logic.
+Device Administrators have a management roles and not a configuration role. Administrators can create new users, change user properties for example enable/disable users, can define weekly policies and associate it to users. Administrators can not modify device setting and can not configure device logic. On each device there can be only one administrator. An administrator can not change the setting of another administrator. For example an administrator can not revoke the administrator rights to an user.
 
 Users have access to resources like sensors or can control switches based on the policy defined by super administrators and adimistrators.
 
-When user is instantiated it is defined its role and an initial key.
+Administrator priviledge can only by assigned by a super administrator.
 
-Examples
+## User Key
+Each user has its own key set that is used to communicate with the device. Keys enforces authenticity, confidentiality and integrity of communication between user and the device.
+
+When user is instantiated it is defined its role and an initial key. This initial key shall be changed by the user at first connection.
+
+Super Administrator initial key is defined per device at production time. First access initial key shall be changed by super administrator.
+
+Examples:
 ```
 	User admin = new User(superA, User.USER_ROLE_ADMIN, "initial key");
 ```	
 
-Remote application instantiate a new user in the device. User have the administrator role and the initial key as initial key
+Super Administrator instantiate a new user in the device. User have the administrator role and the initial key as initial key
 
 ```
 	Device thisDevice = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET, 3, 2000);
 	SuperA superA = new SuperA(RemoteAuthenticator.SUPERA_INITIAL_KEY, thisDevice);
 ```
 
-Mirrors in the remote application the super administrator of the device. COnnection with the device is first established by the discovery procedure.
+Mirrors in the remote application the super administrator of the device. Connection with the device is first established by the discovery procedure.
 
 ```
-                        // object created
-                User user = new User(admin, User.USER_ROLE_USER, "rigqa");
-                user.updateKey("newSutta");
-                user.syncroFields(user);
+		// object created
+    User user = new User(admin, User.USER_ROLE_USER, "rigqa");
+	user.updateKey("newSutta");
+	user.syncroFields(user);
 ```
 New user instance is created on the device by the administrator user admin: admin is an object instance of an administrator.  First action user perform is update its key and syncronizing his fields.
 
 ## Remote authentication
 Each time an user is created also other two objects are created and associated to user objects. They are the local administrator object and remote adinistrator object.
-Remote administrator object (RAO) is in charge of enforcing security in the communication. It stores the keys that enforces security over communication guaranteeing integrity of messages, confidentiality and authentication of origin.
+Remote administrator object (RAO) is in charge of enforcing security in the communication. It stores user keys that enforces security over communication guaranteeing integrity of messages, confidentiality and authentication of origin.
 When user is created Administrators define an initial key used to iitially secure communication. Initial key is provided to users through a secure channel. User shall change the key at first access.
 Each device has a different initial key for the super administrator
 
-## Local Authenticator
-Local authenticator is in charge of user authentication through a PIN. Only user can set or change its own pin. Adminsitrator can unblock the pin in case it is blocked because retries due to wrong pin exceed maximum retries.
+## Local Authenticator Object
+Local authenticator (LAO) is in charge of user authentication through a PIN. Each user own a local authenticator that is associated to user at user creation time.
 
+Relevant user local autianticator object can be retrived in this way.
+```
+	user.getLocalAuthenticatorObject();
+```
 
+Users PIN can have a length min of 4 digits max of 12 digits. Only user itself can set or change its own pin. 
 
+If number of unsecessful pin presented to the device exceed the max retry counter value set by the administrator then LAO object blocks and local user authentication by PIN fails. PIN reset is only possible through support of an administrator.
 
+Retry counter value can be retrieved in this way:
+```
+	lao.getRetryCounter();
+```
+Administrator and usper administrator can set user max retry counter by recovering the LAO relevant to the user and setting the max retry counter value,
+```
+	lao.setMaxRetries(superA, (byte) 3);
+```
+User set its PIN at 1234. String "31323334" represent string "1234" in ascii code.
+```
+	user.setPin(user, pin.substring(0, "31323334"));
+```
+User change its PIN. To change the pin value user shall present first current pin "31323334".
+```
+	user.changePin(user, "31323334", "31313131");
+```
 
-IOT Brick - BR001 is a secure unit designed as general-purpose IOT device by [Babuino Controllers](https://babuinocontrollers.com) that simplifies the design, the implementation and the deployment of IOT solutions on the field minimizing the time to market. IOT Brick do not implement application logic. Application logic shall be configured according to the application requirements just by connecting together several functional blocks. Functional blocks are basic blocks that transform inputs into outputs following specific configurable function. Connecting togheter the input and the output of functional blocks it is ipossible to implement a wide range of application logic.
-Without any hardware development and firmware programming it is possible to implement a large variety of applications and use cases just configuring the functional blocks provided by the device. So, development moves from hardware and firmware development to logic configuration.
-IOT Brick is a connected object that can be controlled remotely by any device or application including app on smartphone or other smart devices. Each unit comes with six configurable inputs and four outputs. Input can be configured to be analog and digital. Number of inputs and outputs can be extended by connecting additional units via RS485 and Ethernet. To simplify the integration in operating environment and applications an SDK (Software development kit) for desktop, server and mobile (Android and IOS) is available. 
-IOTBricks logic can also be changed when the device is deployed on the field just by sendind the device the new configuration.
-To buy IOT Brick device [contact us](https://www.babuinocontrollers.com/contacts/).
-More details about IOT BRick - BR001 are in the [datesheet](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/20210929 BR001V1 - EN.pdf).
+## Delete User
+Super Administrator and Administrators can delete users.
 
-## Why IOT Brick?
-Most IOT projects fails for many reasons: 
-- Businness objective not well designed
-- Technological complexity and missing know how
-- Development costs including hardware and software
-- Industrialization costs
-
-On the other side most of IOT projects share common requirements. IOT Brick technology try to share development, implementation and industrialization efforts of one projects with others by providing a general purpose device covering a wide range of applciations that can be simply integrated in complex IOT architecture.
-
-## From Development to configuration
-Application logic can be easily implemented by configuring and combining the functional blocks into the device. Functional blocks are studied to support the implementation of a wide range of use cases and applications. Functional blocks have inputs and outputs. Logic is created by instantiating a functional block and connecting the output of a functional block to the input of the others. Several types of functional blocks are available. Follow a short summary:
-
-- Sensor block: used to read the value of an input or an output of the board or of others functional block. Input can be configured to read analog values (only from board input) and can implement a Schmitt Trigger whose thresholds are fully configurable. Sensor blocks can also be read remotely by users.
-
-- Switch block: it is a switch that can be controlled remotely by user. It can be configured as monostable (pulse) or bistable (on/off or toggle). Activation of the switch is conditional to a weekly time policy defined by administrator.
-
-- Door block: it is like a switch block but connected to relays driving device outputs. 
- 
-- Mealy Machine: finite State Machine based on a Mealy model with max 8 inputs, 4 outputs and 16 states. Activity of the machine can be conditioned by means of a weekly time policy defined by administrator. Outputs of the block can change its status only if the weekly time policy reports that the machine is active.
-
-- Digital Function Block: implementing any combinatory logic on 4 inputs. Output can be configured as monostable (Pulse) or bistable. Moreover, transition from one logical level to the other can be delayed by configuring the function block. Block is active conditionally to a weekly timed policy.
-
-- Weekly policy block: It defines a weekly time policy. Time policy is regulated by real time clock (RTC) operating in the board. Some of the functional block activities are regulated by the weekly time policy. Access control policy has a validity time defined by a starting time and an expiration time. Group access policy can be defined per user.
-
-<p align="left">
-  <br />
-  <img src="https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/IOT Brick Architecture.png" width="800px" alt="IOT Brick Architecture" >
-  <br />
-</p>
-
-## How to start
-Starter kit includes a project for NetBeans version 8.2. So install NetBeans version 8.2 before starting.
-After just clone locally latest stable version of the Starter Kit Project, launch NetBeans and open the project.
-Power on IOT Brick - BR001 and connect to the lan. Ethernet led start blinking. Also device system blu led start blinking reporting activity of device. If the network is connected to the internet the blue led should alternate two fast blink to a long pasue. This means that the device is connected to the server.
-Note: it is not mandatory required that the device connect to the server. Device can also controllerd over the LAN.
-
-There is no need to configure any IP address. The device implements a discovery protocol that allow to discover devices connected to the network. Only configuration required is to copy in the main file the serial number of the device and the initial password of the device.
-
-## System Reset and Factory Reset
-Device has a factory rest. Pressing reset button for more than 5s cause a system reset. Pressing for more than 15s cause a factory reset. Factory reset delete all the information from the non-volatile memory of the device.
-
-## Library
-Library as JAR file are in the library folder. Library provides a cohmprensive set of objects that mirrors objects in the device. By interacting with these objects it is possible to interact remotely with the device.
-To use the library in a new project just import the JAR file in the project and start developing code. Download the [JAR File from this link](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/20210929 BR001V1 - EN.pdf)
-
-Library can be easly included also in Android Projects. If you need library for IOS device please [reach out](https://www.babuinocontrollers.com/contacts/).
-
-Java doc is available [here](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/javadoc.zip).
-
-## Users
-Users can monitor remotely the application and perform actions. Before any command sent by user is executed user is authenticated. Only authenticated users can perform an action. User authentication is based on a key and additionally for some blocks like switch block or door block also by means of a PIN.
-Three different roles can be assigned to users:
-- Super Administrator with full access to all the features of the device including hardware
-settings and log analysis.
-
-- Administrator able to create, delete users and define access policies.
-
-- User allowed to open close the output based on the policy defined by the administrators.
-
-On average 250 users can be registered with the system, Effective number of users depends on the settings. Each user has its own key used to guarantee end to end security.
-
-## Security
-Communication between devices and administrator/user entities is protected by end-to-end security. Communication protocol creates a secure tunnel between users and Iot Brick that protect exchanged data guaranteeing authenticity confidentiality and integrity. User are authenticated at each and every command by the end-to-end protocol. For some specific commands it is possible to enforce an additional level of user authentication through a PIN.
-
-## Troubleshooting
-
-Please [reach out](https://www.babuinocontrollers.com/contacts/) to the Babuino Controllers team with any technical issues or questions about the Github integration. We're happy to help!
+Super Administrator delete an administrator and an user object on the device. When an user instance is deleted from the device also relevant Remote Authenticator and Local Authenticator are removed.
+```
+	admin.delete(superA);
+	user.delete(superA);
+```
