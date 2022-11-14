@@ -1,23 +1,25 @@
-# IOT Brick Users
+# Users in IOT Brick
 
-### Users remotly access to device resources
+### Users remotly access device resources
 
 ---
 
-IOT Bricks Users are the entities that remotely have access to device resources. Based on their role users can perform administrative actions like create new users, manages policies, assign rights, configure the device logic and delete objects instance on the device. Moreover Users can read a value measured by a sensor from an input and can activate or deactivate a switch.
+IOT Brick Users remotely access device resources through LAN or WAN connectivity. Based on their role, users can perform administrative actions like create, update or delete users, manages policies, assign rights, configure the device logic and delete objects instance on the device. Moreover Users can read value measured by sensors and can activate or deactivate a switch.
 
 ## Users Role
-Access to device resources is based on roles. There are three different roles for users.
+There are three different roles for users.
 
 - Super Administrators
 - Administrators
 - Users
 
-Super Administrators have full access to device resources. Can instantiate or delete any object into the device including digital function blocks orother users and have the rights in order to configure device application logic. Super administrators have full access to device settings and system logs. Super administrator can create new users and define weekly policy. Super administrators can assign adimistrator priviledge to users and have full access to system logs. There is only one super administrator per device. 
+Each role have a different scope of actions.
 
-Device Administrators have a management roles and not a configuration role. Administrators can create new users, change user properties for example enable/disable users, can define weekly policies and associate it to users. Administrators can not modify device setting and can not configure device logic. On each device there can be only one administrator. An administrator can not change the setting of another administrator. For example an administrator can not revoke the administrator rights to an user.
+Super Administrators have full access to device resources. Can instantiate or delete any object into the device including digital function blocks or other users and have full control of application logic configuration. Super administrators have full access to device settings and system logs. Super administrator can perform a device reset or a factory reset. Super administrator can create new users and define weekly policy. Super administrators can assign adimistrator priviledge to users and have full access to system logs. There is only one super administrator per device. 
 
-Users have access to resources like sensors or can control switches based on the policy defined by super administrators and adimistrators.
+Device Administrators have a management roles and not a configuration role. Administrators can create new users, change user properties for example enable/disable users, can define weekly policies and associate it to users. Administrators can not modify device setting and can not configure device logic. On each device there can be several administrators. An administrator can not change the setting of another administrator. For example an administrator can not revoke the administrator rights to another administrator.
+
+Users have a limited scope. They can access read value from sensors, control switches based on the policy defined by super administrators and adimistrators and can change part of its own configuration.
 
 Administrator priviledge can only by assigned by a super administrator.
 
@@ -44,22 +46,34 @@ Mirrors in the remote application the super administrator of the device. Connect
 
 ```
 		// object created
-    User user = new User(admin, User.USER_ROLE_USER, "rigqa");
+	User user = new User(admin, User.USER_ROLE_USER, "rigqa");
 	user.updateKey("newSutta");
 	user.syncroFields(user);
 ```
 New user instance is created on the device by the administrator user admin: admin is an object instance of an administrator.  First action user perform is update its key and syncronizing his fields.
 
-## Remote authentication
+```
+	admin.updateKey("panda");
+```
+
+## Remote Authentication Object
 Each time an user is created also other two objects are created and associated to user objects. They are the local administrator object and remote adinistrator object.
 Remote administrator object (RAO) is in charge of enforcing security in the communication. It stores user keys that enforces security over communication guaranteeing integrity of messages, confidentiality and authentication of origin.
 When user is created Administrators define an initial key used to iitially secure communication. Initial key is provided to users through a secure channel. User shall change the key at first access.
-Each device has a different initial key for the super administrator
+Each device has a different initial key for the super administrator.
+
+If an user forget its key it is not possible to recover the key any longer. User shall ask to administrator a key reset.
+
+```
+	admin2.resetKey(admin, "ribrezza");
+```
+
+In case Super Administrator loose its own key set then only way to recover is device reset.
 
 ## Local Authenticator Object
 Local authenticator (LAO) is in charge of user authentication through a PIN. Each user own a local authenticator that is associated to user at user creation time.
 
-Relevant user local autianticator object can be retrived in this way.
+Relevant user local autianticator object can be retrieved in this way.
 ```
 	user.getLocalAuthenticatorObject();
 ```
