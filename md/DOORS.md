@@ -6,7 +6,7 @@
 
 IOT Brick Users remotely access device resources through LAN or WAN connectivity. Based on their role, users can perform administrative actions like create, update or delete users, manages policies, assign rights, configure the device logic and delete objects instance on the device. Moreover Users can read value measured by sensors and can activate or deactivate a switch.
 
-## Users Role
+## Instantiation and deletion
 There are three different roles for users.
 
 - Super Administrators
@@ -23,7 +23,7 @@ Users have a limited scope. They can access read value from sensors, control swi
 
 Administrator priviledge can only by assigned by a super administrator.
 
-## User Key
+## Door Settings
 Each user has its own key set that is used to communicate with the device. Keys enforces authenticity, confidentiality and integrity of communication between user and the device.
 
 When user is instantiated it is defined its role and an initial key. This initial key shall be changed by the user at first connection.
@@ -55,28 +55,32 @@ New user instance is created on the device by the administrator user admin: admi
 ```
 	admin.updateKey("panda");
 ```
-## User Status
-User can be enabled and disabled- User status can be set by administrators and super administrators. If user is disabled can not perform any action. Default status of user at creation is enabled.
 
-To disable user status status of local object shall be set to disabled. In order to push the change to morror object on the device the update command shall be performed.
+## Door triggering
 
-```                      
-	user.setStatus( User.STATUS_INACTIVE);
-	user.update(admin);
-```
-To enable a disable object:
-```
-	user.setStatus(User.STATUS_ACTIVE);
-	user.update(admin);
-```
-## Access Policy
-An user can be associated with a default access policy and/or with a PolicyLink list. Purpose of policy is to define if and when an user is allowed to open a door.
+with PIN without PIN. In caso of wrong pin.
 
-Another important difference between super administrators and other roles is that super administrator can always triger a door despite default policy and policy link list.
+Led Blink
 
-[Here find more about how configure access policy to users](md/ACCESS_POLICY.md)
+Not possible trigger a door when disabled
 
-## Remote Authentication Object
+Initial status
+
+Get output value
+
+Association to an output or to virtual output
+
+Restore last output value
+
+Name
+Restore last output value
+GPIO Id
+Security
+Pulse duration in ms
+Initial value
+
+Device Extension
+
 Each time an user is created also other two objects are created and associated to user objects. They are the local administrator object and remote adinistrator object.
 Remote administrator object (RAO) is in charge of enforcing security in the communication. It stores user keys that enforces security over communication guaranteeing integrity of messages, confidentiality and authentication of origin.
 When user is created Administrators define an initial key used to iitially secure communication. Initial key is provided to users through a secure channel. User shall change the key at first access.
@@ -122,7 +126,7 @@ User change its PIN. To change the pin value user shall present first current pi
 ## Delete User
 Super Administrator and Administrators can delete users.
 
-Super Administrator delete an administrator and an user object on the device. When an user instance is deleted from the device also relevant Remote Authenticator and Local Authenticator are removed. After deletion of User all memory on the device used to allocate user details is deleted and recovered by the system that can reuse for new user or other objects.
+Super Administrator delete an administrator and an user object on the device. When an user instance is deleted from the device also relevant Remote Authenticator and Local Authenticator are removed.
 ```
 	admin.delete(superA);
 	user.delete(superA);

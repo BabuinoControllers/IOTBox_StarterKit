@@ -29,9 +29,9 @@ Application logic can be easily implemented by configuring and combining the fun
 
 - Sensor block: used to read the value of an input or an output of the board or of others functional block. Input can be configured to read analog values (only from board input) and can implement a Schmitt Trigger whose thresholds are fully configurable. Sensor blocks can also be read remotely by users.
 
-- Switch block: it is a switch that can be controlled remotely by user. It can be configured as monostable (pulse) or bistable (on/off or toggle). Activation of the switch is conditional to a weekly time policy defined by administrator.
+- [Switch](md/DOOR.md) block: it is a switch that can be controlled remotely by user. It can be configured as monostable (pulse) or bistable (on/off or toggle). Activation of the switch is conditional to a weekly time policy defined by administrator.
 
-- Door block: it is like a switch block but connected to relays driving device outputs. 
+- [Door](md/DOOR.md) block: it is like a switch block but connected to relays driving device outputs. 
  
 - Mealy Machine: finite State Machine based on a Mealy model with max 8 inputs, 4 outputs and 16 states. Activity of the machine can be conditioned by means of a weekly time policy defined by administrator. Outputs of the block can change its status only if the weekly time policy reports that the machine is active.
 
@@ -44,7 +44,6 @@ Application logic can be easily implemented by configuring and combining the fun
   <img src="https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/IOT Brick Architecture.png" width="800px" alt="IOT Brick Architecture" >
   <br />
 </p>
-
 ## How to start
 Starter kit includes a project for NetBeans version 8.2. So install NetBeans version 8.2 before starting.
 After just clone locally latest stable version of the Starter Kit Project, launch NetBeans and open the project.
@@ -78,7 +77,12 @@ On average 250 users can be registered with the system, Effective number of user
 
 [Here find more about users](md/USERS.md)
 
-## Security
+## Objects
+On IOT Brick everything is an [object](md/OBJECT.md). Users are objects, digital funcion blocks are object, device itself is considered as an object. Objects share some common behaviour.
+
+[Learn more about objects](md/OBJECT.md)
+
+## Security and communication
 Communication between devices and administrator/user entities is protected by end-to-end security. Communication protocol creates a secure tunnel between users and Iot Brick that protect exchanged data guaranteeing authenticity confidentiality and integrity. User are authenticated at each and every command by the end-to-end protocol. For some specific commands it is possible to enforce an additional level of user authentication through a PIN.
 
 ## Troubleshooting

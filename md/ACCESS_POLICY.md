@@ -72,8 +72,6 @@ To enable a disable object:
 ## Access Policy
 An user can be associated with a default access policy and/or with a PolicyLink list. Purpose of policy is to define if and when an user is allowed to open a door.
 
-Another important difference between super administrators and other roles is that super administrator can always triger a door despite default policy and policy link list.
-
 [Here find more about how configure access policy to users](md/ACCESS_POLICY.md)
 
 ## Remote Authentication Object
