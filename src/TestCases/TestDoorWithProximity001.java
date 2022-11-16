@@ -233,7 +233,7 @@ public class TestDoorWithProximity001 {
                     superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);
                     
                         // object created
-                    User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                    User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                     admin.updateKey("newAdministratorKeysCiccia");
                     admin.syncroFields(admin);
 
@@ -388,7 +388,7 @@ public class TestDoorWithProximity001 {
                     superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);
                     
                         // object created
-                    User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                    User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                     admin.updateKey("newAdministratorKeysCiccia");
                     admin.syncroFields(admin);
 
@@ -547,7 +547,7 @@ public class TestDoorWithProximity001 {
                     superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);
                     
                         // object created
-                    User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                    User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                     admin.updateKey("newAdministratorKeysCiccia");
                     admin.syncroFields(admin);
 
@@ -714,7 +714,7 @@ public class TestDoorWithProximity001 {
                     superA.setPin(superA, "01020304");                    
                     
                         // object created
-                    User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                    User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                     admin.updateKey("newAdministratorKeysCiccia");
                     admin.syncroFields(admin);
                     admin.setPin(admin, "01020304");
@@ -882,7 +882,7 @@ public class TestDoorWithProximity001 {
                     superA.setPin(superA, "01020304");                    
                     
                         // object created
-                    User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                    User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                     admin.updateKey("newAdministratorKeysCiccia");
                     admin.syncroFields(admin);
                     admin.setPin(admin, "01020304");
@@ -1096,7 +1096,7 @@ public class TestDoorWithProximity001 {
                     superA.setPin(superA, "01020304");                    
                     
                         // object created
-                    User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                    User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                     admin.updateKey("newAdministratorKeysCiccia");
                     admin.syncroFields(admin);
                     admin.setPin(admin, "01020304");
@@ -1280,7 +1280,7 @@ public class TestDoorWithProximity001 {
                     superA.setPin(superA, "01020304");                    
                     
                         // object created
-                    User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                    User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                     admin.updateKey("newAdministratorKeysCiccia");
                     admin.syncroFields(admin);
                     admin.setPin(admin, "01020304");

@@ -792,7 +792,7 @@ public class TestLog001 {
             superA.setPin(superA, pin);
 
                     // object created
-            User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
             admin.updateKey("newAdministratorKeysCiccia");
             admin.syncroFields(admin);
 

@@ -75,7 +75,7 @@ settings and log analysis.
 
 On average 250 users can be registered with the system, Effective number of users depends on the settings. Each user has its own key used to guarantee end to end security.
 
-[Here find more about users](md/USERS.md)
+[Here find more about users.](md/USERS.md)
 
 ## Objects
 On IOT Brick everything is an [object](md/OBJECT.md). Users are objects, digital funcion blocks are object, device itself is considered as an object. Objects share some common behaviour.

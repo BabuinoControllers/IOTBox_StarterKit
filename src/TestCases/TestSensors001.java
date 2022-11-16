@@ -471,7 +471,7 @@ public class TestSensors001
 			superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
                         
 				// object created
-			User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+			User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
 			admin.updateKey("newAdministratorKeysCiccia");
                         
 				// object created
@@ -668,7 +668,7 @@ public class TestSensors001
 			superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
                         
 				// object created
-			User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+			User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
 			admin.updateKey("newAdministratorKeysCiccia");
                         
 				// object created
@@ -799,7 +799,7 @@ public class TestSensors001
 			superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
                         
 				// object created
-			User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+			User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
 			admin.updateKey("newAdministratorKeysCiccia");
                         
 				// object created
@@ -933,7 +933,7 @@ public class TestSensors001
 			superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
                         
 				// object created
-			User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+			User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
 			admin.updateKey("newAdministratorKeysCiccia");
                         
 				// object created
@@ -1032,7 +1032,7 @@ public class TestSensors001
 			superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
                         
 				// object created
-			User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+			User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
 			admin.updateKey("newAdministratorKeysCiccia");
                         
 				// object created
@@ -1136,7 +1136,7 @@ public class TestSensors001
 			superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
                         
 				// object created
-			User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+			User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
 			admin.updateKey("newAdministratorKeysCiccia");
                         
 				// object created
@@ -1229,7 +1229,7 @@ public class TestSensors001
 			superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
                         
 				// object created
-			User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+			User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
 			admin.updateKey("newAdministratorKeysCiccia");
                         
 				// object created

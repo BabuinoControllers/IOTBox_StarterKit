@@ -55,8 +55,25 @@ New user instance is created on the device by the administrator user admin: admi
 ```
 	admin.updateKey("panda");
 ```
+## Users Instance
+New users can be added only by administrators and super administrators.
+
+Following command instantiate a new user instance (permanent) into the device and create a local instance of the user.
+```
+	User admin = new User(superA, User.USER_ROLE_ADMIN, "initial key");
+```
+
+Following command create a local instance of an user by an administrator passing as input user objectId. It is not performing IO.
+```
+	User user = new User(adminUserHandler, "00000010");
+```
+
+Following commands creates a local instance of an user given its object id and key.
+```
+	User user = User("00000010", "MyKey");
+```
 ## User Status
-User can be enabled and disabled- User status can be set by administrators and super administrators. If user is disabled can not perform any action. Default status of user at creation is enabled.
+User can be enabled and disabled. User status can be set by administrators and super administrators. If user is disabled can not perform any action. Default status of user at creation is enabled.
 
 To disable user status status of local object shall be set to disabled. In order to push the change to morror object on the device the update command shall be performed.
 

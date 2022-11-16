@@ -878,7 +878,7 @@ public class TestUser001 {
                     // object personalized
                 superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);                          			
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                         // object personalized
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);

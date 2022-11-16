@@ -172,13 +172,13 @@ In case PIN verification is enabled following commands shall be used.
 	door.setOutput(superA, Door.DOOR_COMMAND_PULSE, PIN);
 ```
 
-## Door Activation Status
-Doors and switches can be in one of the two possible activation status: enabled or disabled. If door is disabled it is not possible to change door output status.
+## Sensor Activation Status
+Sensors can be in one of the two possible activation status: enabled or disabled. If sensor is disabled it is not possible to read input status.
 
-To set door activation status use below commands.
+To set sensor activation status use below commands.
 To disable:
 ```                      
-	door.setStatus( Door.SE_DOOR_DISABLED);
+	sensor.setStatus(Sensor.SENSOR_STATUS_DISABLED);
 	door.update(superAdmin);
 ```
 To enable a disable object:
