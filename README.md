@@ -27,11 +27,11 @@ On the other side most of IOT projects share common requirements. IOT Brick tech
 ## From Development to configuration
 Application logic can be easily implemented by configuring and combining the functional blocks into the device. Functional blocks are studied to support the implementation of a wide range of use cases and applications. Functional blocks have inputs and outputs. Logic is created by instantiating a functional block and connecting the output of a functional block to the input of the others. Several types of functional blocks are available. Follow a short summary:
 
-- Sensor block: used to read the value of an input or an output of the board or of others functional block. Input can be configured to read analog values (only from board input) and can implement a Schmitt Trigger whose thresholds are fully configurable. Sensor blocks can also be read remotely by users.
+- [Sensor](md/SENSORS.md) block: used to read the value of an input or an output of the board or of others functional block. Input can be configured to read analog values (only from board input) and can implement a Schmitt Trigger whose thresholds are fully configurable. Sensor blocks can also be read remotely by users.
 
-- [Switch](md/DOOR.md) block: it is a switch that can be controlled remotely by user. It can be configured as monostable (pulse) or bistable (on/off or toggle). Activation of the switch is conditional to a weekly time policy defined by administrator.
+- [Switch](md/DOORS.md) block: it is a switch that can be controlled remotely by user. It can be configured as monostable (pulse) or bistable (on/off or toggle). Activation of the switch is conditional to a weekly time policy defined by administrator.
 
-- [Door](md/DOOR.md) block: it is like a switch block but connected to relays driving device outputs. 
+- [Door](md/DOORS.md) block: it is like a switch block but connected to relays driving device outputs. 
  
 - Mealy Machine: finite State Machine based on a Mealy model with max 8 inputs, 4 outputs and 16 states. Activity of the machine can be conditioned by means of a weekly time policy defined by administrator. Outputs of the block can change its status only if the weekly time policy reports that the machine is active.
 

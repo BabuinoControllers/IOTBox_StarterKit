@@ -79,7 +79,7 @@ To set mode relevant set metod shall be used as reported below. Important: set m
  
  door.update(superA);
   
- mode = door.getMode(Door);
+ mode = door.getMode(superA);
 ```
 In toggle mode the output change its status each time it receive relevant command.
 
@@ -188,7 +188,7 @@ To enable a disable object:
 ```
 
 ## Delete
-Super Administrator can delete a dorr instance into the device by calling relevant delete method.When a door instance is deleted from the device memory is erased, collected and can be reused for other objects.
+Super Administrator can delete a door instance into the device by calling relevant delete method.When a door instance is deleted from the device memory is erased, collected and can be reused for other objects.
 ```
 	door.delete(superA);
 ```
