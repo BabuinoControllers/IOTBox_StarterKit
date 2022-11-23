@@ -7,9 +7,9 @@
 Switches and doors are remotly controlled switches. Theyare functional blocks that can be in one of two possible states: ON or OFF. State of switches and door can be controlled remotely by users according to an access policy defined by administrator. Switch and doors are exactly same objects and refer to same classes. Only difference is that Doors reflect its output state on an real device output. Switch does not reflect its state on an output relay but on a virtual output into the device used to set input to other digital function blocks.
  
 ## Instantiation
-Super Administrators can instantiate and configure switches and door objects on the device. 
-Beloow commands creates an instance of a door object on the device and relevant local instance and set changes to fields. Set methods only change the status of field of local object. In order to propagate changes on remote device an update method shall be invoked.
-
+Only super administrator can instantiate and configure door. 
+Below commands create an instance of a door object on the device and create also a local object instance.
+Commands set also fileds value. Set methods operates on local object fields only. In order to propagate changes to remote device the update method shall be invoked.
 ```
 	Door door = new Door(superA);                        
 	door.setGpioId("00");

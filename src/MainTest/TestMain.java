@@ -14,17 +14,23 @@ public class TestMain {
     
     // IMPORTANT
     // Copy serial number of your device here
-    public static String deviceId = "0000000000001008"; 
+    public static String deviceId = "000000000000100B"; 
    
     public static void main(String[] args)
     {  
        boolean result;
+       
       
        result = TestHelloWord001.run();
        if (!result){
           System.exit(1);
         }
        
+  /*     result = TestDemoNightLight001.run();
+       if (!result){
+          System.exit(1);
+        }*/
+    
        // Uncomment to see other examples
        
   /*     result = TestUser001.run();

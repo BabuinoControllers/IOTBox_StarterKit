@@ -22,6 +22,7 @@ Device Administrators have a management roles and not a configuration role. Admi
 Users have a limited scope. They can access read value from sensors, control switches based on the policy defined by super administrators and adimistrators and can change part of its own configuration.
 
 Administrator priviledge can only by assigned by a super administrator.
+Super Admnistrator user is a special object that is created at factory.
 
 ## User Key
 Each user has its own key set that is used to communicate with the device. Keys enforces authenticity, confidentiality and integrity of communication between user and the device.
@@ -57,6 +58,16 @@ New user instance is created on the device by the administrator user admin: admi
 ```
 ## Users Instance
 New users can be added only by administrators and super administrators.
+
+Super Administrator user instance is created at factory time. In order to get superA instance following commands shall be launched.
+
+```
+		// Discover the device and perform first connection
+	Device thisDevice = Device.discover(deviceSerial, ConnectionDetails.BEARER_ETHERNET,3,2000);     
+	
+		// Get a local instance of superAdministrator
+	superA = new User(User.SUPER_ADM_ID, "SuperAdmin_Key", thisDevice);  
+```
 
 Following command instantiate a new user instance (permanent) into the device and create a local instance of the user.
 ```

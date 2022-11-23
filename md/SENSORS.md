@@ -7,9 +7,9 @@
 Sensors are digital function blocks designed for telemetry. They allow users to get remotly measures collected from sensors connected to the board.
  
 ## Instantiation
-Super Administrators can instantiate and configure sensors. 
-Beloow commands creates an instance of a sensor object on the device and relevant local instance and set changes to fields. Set methods only change the status of field of local object. In order to propagate changes on remote device an update method shall be invoked.
-
+Only super administrator can instantiate and configure sensors. 
+Below commands create an instance of a sensor object on the device and create also a local object instance.
+Commands set also fileds value. Set methods operates on local object fields only. In order to propagate changes to remote device the update method shall be invoked.
 ```
 	Sensor = new Sensor(superA, Sensor.SENSOR_TYPE_GPIO, true); 
 	sensor.syncroFields(superA);
@@ -54,10 +54,31 @@ To set sensor type
 ```
 Sensor type SENSOR_TYPE_GPIO measure voltage on the input and convert it to a digital value that can be on or off. Conversion is based on a [Schmitt trigger](https://en.wikipedia.org/wiki/Schmitt_trigger) comparator.
 
+To set thresholds value use the following methods. In input to the methods a voltage value measured in millivolts shall be passed.
+```
+   sensor.setHighThreshold(8000);
+   sensor.setLowThreshold(6000);
+   
+   sensor.update();
+```
+
 ## Read Sensor Value
-To read sensor value just call getMeasure() methods.
+To read sensor value just call getMeasure() methods. This methods connect to device and measure value from relevant input. So this method invlolve io activities.
+
 ```
 	telemetry = sensor.getMeasure(admin);
+
+		// check telemetry
+	if (!( telemetry.equals(Sensor.SENSOR_VALUE_ON) ))
+	{
+		throw new TestException();
+	}
+```
+
+In case there is no need to get latest value measured by the device without permorming any connection with the device then getLastMeasure() method can be invoked. Information provided by this method could not be realistic since it provides latest information acquired from the device and do not start any communication session with the device.
+
+```
+	telemetry = sensor.getLastMeasure();(admin);
 
 		// check telemetry
 	if (!( telemetry.equals(Sensor.SENSOR_VALUE_ON) ))
@@ -82,7 +103,7 @@ To enable a disable object:
 ```
 
 ## Delete
-Super Administrator can delete a sensor instance into the device by calling relevant delete method.When a sensor instance is deleted from the device memory is erased, collected and can be reused for other objects.
+Super Administrator can delete a sensor instance into the device by calling relevant delete method. When a sensor instance is deleted from the device memory is erased, collected and can be reused for other objects.
 ```
 	sensor.delete(superA);
 ```
