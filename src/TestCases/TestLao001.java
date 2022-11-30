@@ -2075,7 +2075,7 @@ public class TestLao001
                         superA.resetPin(superA);	
                         
 				// object created
-			User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+			User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
 			admin.updateKey("newAdministratorKeysCiccia");
                         
 				// object created

@@ -394,7 +394,7 @@ public class TestDeviceExtender001 {
                 superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                         // object created
@@ -551,7 +551,7 @@ public class TestDeviceExtender001 {
                 superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
 
@@ -682,7 +682,7 @@ public class TestDeviceExtender001 {
                 superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                         // object created
@@ -767,7 +767,7 @@ public class TestDeviceExtender001 {
             superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
 
                     // object created
-            User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
             admin.updateKey("newAdministratorKeysCiccia");
             admin.syncroFields(admin);
 

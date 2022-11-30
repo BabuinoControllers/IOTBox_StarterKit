@@ -137,7 +137,7 @@ public class TestHelloWord001 {
                 superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
@@ -322,7 +322,7 @@ public class TestHelloWord001 {
 
 
                     // object created
-            User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
             admin.updateKey("newAdministratorKeysCiccia");
             admin.setPin(admin, "31323334");
             admin.syncroFields(admin);
@@ -510,7 +510,7 @@ public class TestHelloWord001 {
 
 
                     // object created
-            User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
             admin.updateKey("newAdministratorKeysCiccia");
             admin.setPin(admin, "31323334");
             admin.syncroFields(admin);
@@ -695,7 +695,7 @@ public class TestHelloWord001 {
             superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
 
                     // object created
-            User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
             admin.updateKey("newAdministratorKeysCiccia");
             admin.syncroFields(admin);
 
@@ -795,7 +795,7 @@ public class TestHelloWord001 {
             superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
 
                     // object created
-            User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
             admin.updateKey("newAdministratorKeysCiccia");
             admin.syncroFields(admin);
 
@@ -884,7 +884,7 @@ public class TestHelloWord001 {
             superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
 
                     // object created
-            User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
             admin.updateKey("newAdministratorKeysCiccia");
             admin.syncroFields(admin);
 
@@ -1007,7 +1007,7 @@ public class TestHelloWord001 {
             superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
 
                     // object created
-            User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
             admin.updateKey("newAdministratorKeysCiccia");
             admin.syncroFields(admin);
 
@@ -1161,7 +1161,7 @@ public class TestHelloWord001 {
             superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
 
                     // object created
-            User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
             admin.updateKey("newAdministratorKeysCiccia");
             admin.syncroFields(admin);
 
@@ -1250,7 +1250,7 @@ public class TestHelloWord001 {
             superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
 
                     // object created
-            User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
             admin.updateKey("newAdministratorKeysCiccia");
             admin.syncroFields(admin);
 
@@ -1372,7 +1372,7 @@ public class TestHelloWord001 {
             superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
 
                     // object created
-            User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
             admin.updateKey("newAdministratorKeysCiccia");
             admin.syncroFields(admin);
 
@@ -1751,7 +1751,7 @@ public class TestHelloWord001 {
             superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
 
                     // object created
-            User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
             admin.updateKey("newAdministratorKeysCiccia");
             admin.syncroFields(admin);
 
@@ -1874,7 +1874,7 @@ public class TestHelloWord001 {
             superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
 
                     // object created
-            User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
             admin.updateKey("newAdministratorKeysCiccia");
             admin.syncroFields(admin);
 
@@ -1969,7 +1969,7 @@ public class TestHelloWord001 {
             superA.setPin(superA, pin);
 
                     // object created
-            User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
             admin.updateKey("newAdministratorKeysCiccia");
             admin.syncroFields(admin);
 
@@ -2108,7 +2108,7 @@ public class TestHelloWord001 {
             superA.setPin(superA, pin);
 
                     // object created
-            User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
             admin.updateKey("newAdministratorKeysCiccia");
             admin.syncroFields(admin);
 
@@ -2267,7 +2267,7 @@ public class TestHelloWord001 {
             superA.setPin(superA, pin);
 
                     // object created
-            User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
             admin.updateKey("newAdministratorKeysCiccia");
             admin.syncroFields(admin);
 
@@ -2390,7 +2390,7 @@ public class TestHelloWord001 {
             superA.setPin(superA, pin);
             
                     // object created
-            User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
             admin.updateKey("newAdministratorKeysCiccia");
             admin.syncroFields(admin);
 

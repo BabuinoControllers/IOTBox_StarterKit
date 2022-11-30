@@ -266,7 +266,7 @@ public class TestUserMqttTLS001 {
 			superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
                         
 				// object created
-			User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+			User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
 			admin.updateKey("newAdministratorKeysCiccia");
                         
 				// object created
@@ -415,7 +415,7 @@ public class TestUserMqttTLS001 {
 
 
                     // object created
-            User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
             admin.updateKey("newAdministratorKeysCiccia");
             admin.setPin(admin, pin);
             admin.syncroFields(admin);
@@ -592,7 +592,7 @@ public class TestUserMqttTLS001 {
                 superA.changePin(superA, pin, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
@@ -764,7 +764,7 @@ public class TestUserMqttTLS001 {
                 superA.changePin(superA, pin, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);              
                 

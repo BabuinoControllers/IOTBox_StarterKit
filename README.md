@@ -1,6 +1,6 @@
 # IOT Brick Starter Kit
 
-### The IOT solution that is ready when you are
+### The IOT solution ready when you are
 
 ---
 
@@ -33,15 +33,15 @@ On the other side most of IOT projects share common requirements. IOT Brick tech
 ## From Development to configuration
 Application logic can be easily implemented by configuring and combining the functional blocks into the device. Functional blocks are studied to support the implementation of a wide range of use cases and applications. Functional blocks have inputs and outputs. Logic is created by instantiating a functional block and connecting the output of a functional block to the input of the others. Several types of functional blocks are available. Follow a short summary:
 
-- Sensor block: used to read the value of an input or an output of the board or of others functional block. Input can be configured to read analog values (only from board input) and can implement a Schmitt Trigger whose thresholds are fully configurable. Sensor blocks can also be read remotely by users.
+- [Sensor](md/SENSORS.md) block: used to read the value of an input or an output of the board or of others functional block. Input can be configured to read analog values (only from board input) and can implement a Schmitt Trigger whose thresholds are fully configurable. Sensor blocks can also be read remotely by users.
 
-- Switch block: it is a switch that can be controlled remotely by user. It can be configured as monostable (pulse) or bistable (on/off or toggle). Activation of the switch is conditional to a weekly time policy defined by administrator.
+- [Switch](md/DOORS.md) block: it is a switch that can be controlled remotely by user. It can be configured as monostable (pulse) or bistable (on/off or toggle). Activation of the switch is conditional to a weekly time policy defined by administrator.
 
-- Door block: it is like a switch block but connected to relays driving device outputs. 
+- [Door](md/DOORS.md) block: it is like a switch block but connected to relays driving device outputs. 
  
 - Mealy Machine: finite State Machine based on a Mealy model with max 8 inputs, 4 outputs and 16 states. Activity of the machine can be conditioned by means of a weekly time policy defined by administrator. Outputs of the block can change its status only if the weekly time policy reports that the machine is active.
 
-- Digital Function Block: implementing any combinatory logic on 4 inputs. Output can be configured as monostable (Pulse) or bistable. Moreover, transition from one logical level to the other can be delayed by configuring the function block. Block is active conditionally to a weekly timed policy.
+- [Digital Function Block](md/DFB.md): implementing any combinatory logic on 4 inputs. Output can be configured as monostable (Pulse) or bistable. Moreover, transition from one logical level to the other can be delayed by configuring the function block. Block is active conditionally to a weekly timed policy.
 
 - Weekly policy block: It defines a weekly time policy. Time policy is regulated by real time clock (RTC) operating in the board. Some of the functional block activities are regulated by the weekly time policy. Access control policy has a validity time defined by a starting time and an expiration time. Group access policy can be defined per user.
 
@@ -57,7 +57,7 @@ After just clone locally latest stable version of the Starter Kit Project, launc
 Power on IOT Brick - BR001 and connect to the lan. Ethernet led start blinking. Also device system blu led start blinking reporting activity of device. If the network is connected to the internet the blue led should alternate two fast blink to a long pasue. This means that the device is connected to the server.
 Note: it is not mandatory required that the device connect to the server. Device can also controllerd over the LAN.
 
-There is no need to configure any IP address. The device implements a discovery protocol that allow to discover devices connected to the network. Only configuration required is to copy in the main file the serial number of the device and the initial password of the device.
+There is no need to configure any IP address. The device implements a discovery protocol that allow applications to discover devices connected to the network. Only configuration required is to copy in the main file the serial number of the device and the initial password of the device.
 
 ## System Reset and Factory Reset
 Device has a factory rest. Pressing reset button for more than 5s cause a system reset. Pressing for more than 15s cause a factory reset. Factory reset delete all the information from the non-volatile memory of the device.
@@ -70,6 +70,11 @@ Library can be easly included also in Android Projects. If you need library for 
 
 Java doc is available [here](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/javadoc.zip).
 
+## Objects
+On IOT Brick everything is an [object](md/OBJECT.md). Users are objects, digital funcion blocks are object, device itself is considered as an object. Objects share some common behaviour.
+
+[Learn more about objects.](md/OBJECTS.md)
+
 ## Users
 Users can monitor remotely the application and perform actions. Before any command sent by user is executed user is authenticated. Only authenticated users can perform an action. User authentication is based on a key and additionally for some blocks like switch block or door block also by means of a PIN.
 Three different roles can be assigned to users:
@@ -81,6 +86,11 @@ settings and log analysis.
 - User allowed to open close the output based on the policy defined by the administrators.
 
 On average 250 users can be registered with the system, Effective number of users depends on the settings. Each user has its own key used to guarantee end to end security.
+
+[Here find more about users.](md/USERS.md)
+
+## Connecting to IOTBrick
+[Here find more about connecting users.](md/CONNECTING.md)
 
 ## Security
 Communication between devices and administrator/user entities is protected by end-to-end security. Communication protocol creates a secure tunnel between users and Iot Brick that protect exchanged data guaranteeing authenticity confidentiality and integrity. User are authenticated at each and every command by the end-to-end protocol. For some specific commands it is possible to enforce an additional level of user authentication through a PIN.

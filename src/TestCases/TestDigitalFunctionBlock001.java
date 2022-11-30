@@ -495,7 +495,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                         // object created
@@ -738,7 +738,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
 
@@ -873,7 +873,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.setPin(superA, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
@@ -1032,7 +1032,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.setPin(superA, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
@@ -1203,7 +1203,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.setPin(superA, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
@@ -1388,7 +1388,7 @@ public class TestDigitalFunctionBlock001 {
             superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);	
 
                     // object created
-            User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
             admin.updateKey("newAdministratorKeysCiccia");
             admin.syncroFields(admin);
 
@@ -1492,7 +1492,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.setPin(superA, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
@@ -1710,7 +1710,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.setPin(superA, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
@@ -1835,7 +1835,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.setPin(superA, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
@@ -2077,7 +2077,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.setPin(superA, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
@@ -2359,7 +2359,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.setPin(superA, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
@@ -2493,7 +2493,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.setPin(superA, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
@@ -2682,7 +2682,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.setPin(superA, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
@@ -2811,7 +2811,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.setPin(superA, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
@@ -2940,7 +2940,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.setPin(superA, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
@@ -3069,7 +3069,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.setPin(superA, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
@@ -3297,7 +3297,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.setPin(superA, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
@@ -3531,7 +3531,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.setPin(superA, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
@@ -3717,7 +3717,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.setPin(superA, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
@@ -3922,7 +3922,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.setPin(superA, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
@@ -4088,7 +4088,7 @@ public class TestDigitalFunctionBlock001 {
                 superA.setPin(superA, pin);
 
                         // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN, "pussy");
+                User admin = new User(superA, User.USER_ROLE_ADMIN, "lucy");
                 admin.updateKey("newAdministratorKeysCiccia");
                 admin.syncroFields(admin);
                 policyId = admin.getAcPolicy();               
