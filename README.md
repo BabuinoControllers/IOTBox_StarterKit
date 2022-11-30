@@ -15,6 +15,12 @@ IOTBricks logic can also be changed when the device is deployed on the field jus
 To buy IOT Brick device [contact us](https://www.babuinocontrollers.com/contacts/).
 More details about IOT BRick - BR001 are in the [datesheet](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/20210929_BR001V1_EN.pdf).
 
+<p align="left">
+  <br />
+  <img src="https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/img/IOT_Brick_BR001.jpg" width="800px" alt="IOT Brick Architecture" >
+  <br />
+</p>
+
 ## Why IOT Brick?
 Most IOT projects fails for many reasons: 
 - Businness objective not well designed
@@ -41,13 +47,13 @@ Application logic can be easily implemented by configuring and combining the fun
 
 <p align="left">
   <br />
-  <img src="https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/IOT Brick Architecture.png" width="800px" alt="IOT Brick Architecture" >
+  <img src="https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/img/IOT_Brick_Architecture.png" width="800px" alt="IOT Brick Architecture" >
   <br />
 </p>
 
 ## How to start
-Starter kit includes a project for NetBeans version 8.2. So install NetBeans version 8.2 before starting.
-After just clone locally latest stable version of the Starter Kit Project, launch NetBeans and open the project.
+Starter kit includes a project for Intellij. So install Intellij before starting.
+After just clone locally latest stable version of the Starter Kit Project, launch the IDE and open the project. Project shall be compiled with Java 8.
 Power on IOT Brick - BR001 and connect to the lan. Ethernet led start blinking. Also device system blu led start blinking reporting activity of device. If the network is connected to the internet the blue led should alternate two fast blink to a long pasue. This means that the device is connected to the server.
 Note: it is not mandatory required that the device connect to the server. Device can also controllerd over the LAN.
 

@@ -14,6 +14,12 @@ IOT Brick object methods are invoked remotely by invoking a method on a local ob
 
 So an object has two instances. One instance off device, locally to a mobile phone or to computer and a mirrored object on the device. By interacting with the local object it is possible to interact transparently with the mirrored object. Communication is enterly managed by SDK wothout any action of programmer.
 
+<p align="left">
+  <br />
+  <img src="https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/img/mirrored_objects.png" width="800px" alt="IOT Brick Architecture" >
+  <br />
+</p>
+
 This is the code that shall be used in order to create a door function block, set some fields and switch ON the
 ```          
 	door = new Door(superA);                        
