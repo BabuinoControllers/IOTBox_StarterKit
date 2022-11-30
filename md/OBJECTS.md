@@ -16,7 +16,7 @@ So an object has two instances. One instance off device, locally to a mobile pho
 
 <p align="left">
   <br />
-  <img src="https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/img/mirrored_objects.png" width="800px" alt="IOT Brick Architecture" >
+  <img src="https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/img/mirrored_objects.png" width="500px" alt="IOT Brick Architecture" >
   <br />
 </p>
 
