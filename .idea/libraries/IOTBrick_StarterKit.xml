@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="IOTBrick_StarterKit">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/IOTBrick_StarterKit.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

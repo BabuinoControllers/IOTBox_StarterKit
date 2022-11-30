@@ -12,23 +12,78 @@ public class TestDemoNightLight001 {
     public static final String testBatch = "TestDemoNightLight001";    
     public static final String deviceId = MainTest.TestMain.deviceId;
 
-    public static SuperA superA;  
-    public static Device thisDevice;
-    
-    public static final int RESET_TO_FACTORY_SETTING = 1;
-    public static final int CONFIGURATION_AND_TELEMETRY_UC = 2;
-    public static final int TELEMETRY_UC = 3;
-    
-    public static int useCase = CONFIGURATION_AND_TELEMETRY_UC;
-    
+        // Mqtt parameters
+    public static final String clientId = "3333333333";    
+    public static final String hostName =  "80.211.35.177"; //mqtt cloud
+    public static final int port =  1883;    
+
+        // OBJECT Identifiers
     public static final String SENSOR_LDR_OBJECT_ID = "00000008";
     public static final String SENSOR_SWITCH_OBJECT_ID = "00000009";
     public static final String DOOR_OBJECT_ID = "00000007";
     public static final String SENSOR_GPIO_OBJECT_ID = "0000000D";
     public static final String SENSOR_LDR_VOLTAGE_OBJECT_ID = "0000000A";
     public static final String SENSOR_LDR_OHM_OBJECT_ID = "0000000B";
-       
+               
+    //********************************
+    // USE CASE SELECTOR
+    public static final int RESET_TO_FACTORY_SETTING = 1;
+    public static final int CONFIGURATION_UC = 2;
+    public static final int TELEMETRY_UC = 3;
+    public static final int EXERCISE_UC = 4;
     
+        // Use Case selector
+    public static int useCase = RESET_TO_FACTORY_SETTING;
+    
+    //********************************
+    // CONNECTIVITY SELECTOR
+    public static final int CONNECTIVITY_LAN = 1;
+    public static final int CONNECTIVITY_MQTT = 2;
+    
+        // Connectivity selector
+    public static int connectivitySelector = CONNECTIVITY_MQTT;
+
+    /********************************
+     Private Methods
+     ********************************/
+    private static Device connect() throws DiscoveryException{
+
+        Device  device;
+
+        switch (connectivitySelector) {
+
+            case CONNECTIVITY_LAN:
+
+                device = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET, 3, 2000);
+
+                break;
+
+            case CONNECTIVITY_MQTT:
+
+                ConnectionDetailsMqtt connectionDetails = new ConnectionDetailsMqtt();
+
+                connectionDetails.setBearer(ConnectionDetailsMqtt.BEARER_MQTT_OVER_ETHERNET);
+                connectionDetails.setClientId(clientId);
+                connectionDetails.setHostName(hostName);
+                connectionDetails.setPort(port);
+                connectionDetails.setKeepAliveTime(60000);
+                connectionDetails.setPassword("Ma6#fht<!!");
+                connectionDetails.setUserName(clientId);
+                connectionDetails.setDeviceId(deviceId);
+
+                device = new Device();
+                device.setConnectionDetails(connectionDetails);
+
+                break;
+
+            default:
+
+                device = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET, 3, 2000);
+
+        }
+
+        return device;
+    }
     /********************************
     Public Methods
     ********************************/
@@ -50,30 +105,32 @@ public class TestDemoNightLight001 {
        
        j = 6;
         try {
-                thisDevice = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET, 3, 2000);
 
-                superA = new SuperA(RemoteAuthenticator.SUPERA_INITIAL_KEY, thisDevice); 
-                
-                
-                switch(useCase){
-                    
-                    case CONFIGURATION_AND_TELEMETRY_UC:
-                        
-                        configurationAndTelemetry();
-                        break;
-                        
-                    case TELEMETRY_UC:
-                        
-                        telemetry();
-                        break;                        
-                    
-                    case RESET_TO_FACTORY_SETTING:
-                        
-                        resetTofactorySetting();
-                        break;
-                }
+            switch(useCase){
+
+                case CONFIGURATION_UC:
+
+                    configurationAndTelemetry();
+                    break;
+
+                case TELEMETRY_UC:
+
+                    telemetry();
+                    break;                        
+
+                case RESET_TO_FACTORY_SETTING:
+
+                    resetToFactorySetting();
+                    break;
+
+                case EXERCISE_UC:
+
+                    exercise();
+                    break;
+
+            }
         }
-        catch (TestException | DiscoveryException e){
+        catch (TestException e){
                          Logger.detail("TEST FAILURE ----->" + j);
             return false;
         }            
@@ -93,8 +150,7 @@ public class TestDemoNightLight001 {
     public static void configurationAndTelemetry() throws TestException
     {
             Door door;
-            String policyId;
-            AccessPolicy defaultPolicy;               
+
             String testCode = testBatch + "/" + "Configuration and Telemetry";               
 
             // ---------------------- Code -------------------------------
@@ -103,8 +159,10 @@ public class TestDemoNightLight001 {
 
                 Logger.testCase(testCode);
 
+                Device device = connect();
+                SuperA superA = new SuperA(RemoteAuthenticator.SUPERA_INITIAL_KEY, device);
                     // launch a ping
-                thisDevice.ping();
+                device.ping();
 
 //#
 //# Configure Users
@@ -208,19 +266,13 @@ public class TestDemoNightLight001 {
 //# System Reset to restart
 //#                                
 
-                thisDevice.systemReset(pin, superA, true);
-//#
-//# Telemetry. Usually done by itself;
-//#                                
-                
-                telemetry();
+                device.systemReset(pin, superA, true);
 
         }
-        catch (CommandErrorException | ObjectException | IOException e)
+        catch (CommandErrorException | ObjectException | IOException | DiscoveryException e)
         {
-            Logger.testResult(false);		
-            TestException t = new TestException();
-            throw t;
+            Logger.testResult(false);
+            throw new TestException();
         }
 
         Logger.testCase(testCode);
@@ -247,23 +299,16 @@ public class TestDemoNightLight001 {
 
                 Logger.testCase(testCode);
 
+                Device device = connect();
+
+                    // creates super A instance
+                SuperA superA = new SuperA(RemoteAuthenticator.SUPERA_INITIAL_KEY, device);
+
                     // launch a ping
-                thisDevice.ping();
-
+                device.ping();
 //#
-//# Configure Super Administrator Users
+//# Creates local object and synchronize with the device
 //#
-                String pin = "31313131";
-                
-                        // instantiate a local User object for the SUPER-A
-                //User superA = new User(User.SUPER_ADM_ID, RemoteAuthenticator.SUPERA_INITIAL_KEY);                        
-                superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);
-                superA.setPin(superA, pin);
-
-//#
-//# Creates local object and syncronize with the device
-//#                
-                    // create the door. Configure it.
                 Door door = new Door(superA, DOOR_OBJECT_ID);
                 Sensor sensorLdr = new Sensor(superA, SENSOR_LDR_OBJECT_ID);
                 Sensor sensorSwitch = new Sensor(superA, SENSOR_SWITCH_OBJECT_ID);
@@ -271,11 +316,8 @@ public class TestDemoNightLight001 {
                 Sensor sensorLdrOHM = new Sensor(superA, SENSOR_LDR_OHM_OBJECT_ID);
                 Sensor sensorLdrVoltage = new Sensor(superA, SENSOR_LDR_VOLTAGE_OBJECT_ID);
                 
-                                    
-                
                 while(true){
-                
-                    
+
                     String sensorLdrOut = sensorLdr.getMeasure(superA);
                     String sensorLdrOHMOut = sensorLdrOHM.getMeasure(superA);
                     String sensorLdrVoltageOut = sensorLdrVoltage.getMeasure(superA);
@@ -284,9 +326,9 @@ public class TestDemoNightLight001 {
                     String doorOut = door.getOutput(superA);
                     
                         // get System measures
-                    double vcc = thisDevice.getVcc(superA);
-                    double temperature = thisDevice.getMicroTemperature(superA);
-                    int batteryVoltage = thisDevice.getBatteryVoltage(superA);
+                    double vcc = device.getVcc(superA);
+                    double temperature = device.getMicroTemperature(superA);
+                    int batteryVoltage = device.getBatteryVoltage(superA);
                     
                     Logger.detail("---------------------------------------------------");
 
@@ -298,7 +340,7 @@ public class TestDemoNightLight001 {
                     Logger.detail("doorOut: " + doorOut);
                     
                         // device parameters
-                    Logger.detail(" vcc: " + vcc);                    
+                    Logger.detail(" vcc: " + vcc * 1000);
                     Logger.detail(" DeviceTemperature Celsius: " + temperature);
                     Logger.detail(" Battery Voltage: " + batteryVoltage);
                     
@@ -317,11 +359,10 @@ public class TestDemoNightLight001 {
                 }
 
         }
-        catch (CommandErrorException | ObjectException | IOException e)
+        catch (CommandErrorException | ObjectException | IOException | DiscoveryException e)
         {
-            Logger.testResult(false);		
-            TestException t = new TestException();
-            throw t;
+            Logger.testResult(false);
+            throw new TestException();
         }       
    }
    /*----------------------------------------------------------------------------
@@ -334,44 +375,81 @@ public class TestDemoNightLight001 {
     Security Level: None
 
     ------------------------------------------------------------------------------*/
-   public static void resetTofactorySetting() throws TestException {
-                   
-        String testCode = testBatch + "/" + "reset to factory setting";               
+   public static void resetToFactorySetting() throws TestException {
 
-        // ---------------------- Code -------------------------------
-            try
-            {
+       String testCode = testBatch + "/" + "reset to factory setting";
 
-                Logger.testCase(testCode);
+       // ---------------------- Code -------------------------------
+       try {
 
-                    // launch a ping
-                thisDevice.ping();
+           Logger.testCase(testCode);
 
-//#
-//# Configure Users
-//#
-                String pin = "31313131";
-                
-                        // instantiate a local User object for the SUPER-A
-                //User superA = new User(User.SUPER_ADM_ID, RemoteAuthenticator.SUPERA_INITIAL_KEY);                        
-                superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);
-                superA.setPin(superA, pin);
+           Device device = connect();
+           SuperA superA = new SuperA(RemoteAuthenticator.SUPERA_INITIAL_KEY, device);
+
+           // launch a ping
+           device.ping();
 
 //#
 //# System Reset to factory setting
-//#                                
+//#
+           Logger.detail("*****************************************************************");
+           Logger.detail("*****************************************************************");
+           Logger.detail("Reset to Factory settings ongoing: PLEASE WAIT Until test is over");
+           Logger.detail("*****************************************************************");
+           Logger.detail("*****************************************************************");
 
-                thisDevice.systemFactoryReset(pin, superA, true);
+           String pin = "31313131";
+           device.systemFactoryReset(pin, superA, true);
 
-            }
-            catch (CommandErrorException | ObjectException | IOException e)
-            {
-                Logger.testResult(false);		
-                TestException t = new TestException();
-                throw t;
-            }
+       } catch (CommandErrorException | ObjectException | IOException | DiscoveryException e) {
+           Logger.testResult(false);
+           throw new TestException();
+       }
+
+       Logger.testCase(testCode);
+       Logger.testResult(true);
+   }
+    /*----------------------------------------------------------------------------
+    exercise
+    --------------------------------------------------------------------------
+    AUTHOR:	PDI
+
+    DESCRIPTION: SuperAdministrator reset the device to factory reset.
+
+    Security Level: None
+
+    ------------------------------------------------------------------------------*/
+    public static void exercise() throws TestException {
+
+        String testCode = testBatch + "/" + "Exercise";
+
+        // ---------------------- Code -------------------------------
+        try {
 
             Logger.testCase(testCode);
-            Logger.testResult(true);
-        }        
+
+            Device device = connect();
+            SuperA superA = new SuperA(RemoteAuthenticator.SUPERA_INITIAL_KEY, device);
+
+            // launch a ping
+            device.ping();
+
+            while(true){
+
+                // sleep
+                try {
+
+                    Thread.sleep(2000);
+
+                } catch( InterruptedException e){
+
+                }
+            }
+
+        } catch (IOException | DiscoveryException e) {
+            Logger.testResult(false);
+            throw new TestException();
+        }
+    }
 }
