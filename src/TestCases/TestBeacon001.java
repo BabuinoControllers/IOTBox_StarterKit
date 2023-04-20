@@ -1,4 +1,5 @@
-package com.sdk;
+package TestCases;
+import com.sdk.*;
 
 import com.testlog.TestCase;
 import com.testlog.TestEventHandler;

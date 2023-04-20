@@ -1,11 +1,9 @@
-package com.sdk;
+package TestCases;
+import com.sdk.*;
 
 
 import java.io.IOException;
 
-import com.testlog.TestCase;
-import com.testlog.TestEventHandler;
-import com.testlog.TestUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import java.util.Calendar;

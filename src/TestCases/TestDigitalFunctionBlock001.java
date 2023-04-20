@@ -1,4 +1,5 @@
-package com.sdk;
+package TestCases;
+import com.sdk.*;
 
 
 import java.io.IOException;

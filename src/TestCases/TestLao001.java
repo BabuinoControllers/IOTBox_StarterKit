@@ -1,4 +1,5 @@
-package com.sdk;
+package TestCases;
+import com.sdk.*;
 //********************************************************************************
 // *							PDI COPYRIGHT 2015
 // * HEADER

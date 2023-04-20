@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="SDK_IOTBrick">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/dist/lib/SDK_IOTBrick.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/SDK_IOTBrick.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
