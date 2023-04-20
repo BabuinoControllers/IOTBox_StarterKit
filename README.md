@@ -17,7 +17,7 @@ More details about IOT BRick - BR001 are in the [datesheet](https://github.com/B
 
 <p align="left">
   <br />
-  <img src="https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/img/IOT_Brick_BR001.jpg" width="800px" alt="IOT Brick Architecture" >
+  <img src="https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/img/IOT_Brick_BR001.jpg" width="500px" alt="IOT Brick Architecture" >
   <br />
 </p>
 
