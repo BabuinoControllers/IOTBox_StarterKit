@@ -1,25 +1,36 @@
-package TestCases;
+package com.sdk;
 
-import com.sdk.*;
+
 import java.io.IOException;
+
+import com.testlog.TestCase;
+import com.testlog.TestEventHandler;
+import com.testlog.TestUnit;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
+
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.SocketTimeoutException;
+import com.testlog.*;
 
+@SuppressWarnings("unused")
 public class TestDiscovery001 {
-    
-    /********************************
-    PUBLIC Fields
-    ********************************/
+
+//    /********************************
+//     PUBLIC Fields
+//     ********************************/
     public static final String testBatch = "TestDiscovery001";
 
-    /********************************
-    Public Methods
-    ********************************/
+//    /********************************
+//     PUBLIC Methods
+//     ********************************/
     public static User superA;
-    public static Device thisDevice;    
-    public static final String deviceId = MainTest.TestMain.deviceId;
+    public static Device thisDevice;
+    public static final String deviceId = TestMain.deviceId;
+
+    private static final TestUnit thisUnit = new TestUnit();
+
 
     /*----------------------------------------------------------------------------
     run
@@ -31,127 +42,139 @@ public class TestDiscovery001 {
     Security Level: None
 
     ------------------------------------------------------------------------------*/
-    public static boolean run()
-    {
+    @Test
+    public void run() {
+        thisUnit.setTestTitle(testBatch);
+
+
         int j;
-       // ---------------------- Code -------------------------------        
-       Command.onError = Command.ALT_ON_ERROR;
-       
-       j = 1;
+        // ---------------------- Code -------------------------------
+        Command.onError = Command.ALT_ON_ERROR;
+
+        j = 1;
         try {
-                thisDevice = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET,3,2000);     
-                
-                superA = new User(User.SUPER_ADM_ID, RemoteAuthenticator.SUPERA_INITIAL_KEY, thisDevice);                 
-                
-                testCase01(); // ETHERNET
-                j++;
+            thisDevice = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET, 3, 2000);
 
-                //testCase02(); // WIFI
-                j++;
+            thisUnit.setDevice(thisDevice);
 
-                testCase03(); // ETHENET
-                j++;
+            superA = new User(User.SUPER_ADM_ID, RemoteAuthenticator.SUPERA_INITIAL_KEY, thisDevice);
 
-                // testCase04(); // WIFI
-                j++;
+            testCase01(); // ETHERNET
+            j++;
 
-                //testCase05(); //WIFI
-                j++;
+            //testCase02(); // WIFI
+            j++;
 
-                testCase06(); //ETHERNET
-                j++;
+            testCase03(); // ETHERNET
+            j++;
+
+            // testCase04(); // WIFI
+            j++;
+
+            //testCase05(); //WIFI
+            j++;
+
+            testCase06(); //ETHERNET
+            j++;
 
 
-                testCase01();
-                j++;
-                    
+            testCase01();
+            j++;
+
+        } catch (TestException | DiscoveryException e) {
+            thisUnit.testCompleted(false, "failure at test case " + j);
+
+            Logger.detail("TEST FAILURE ----->" + j);
+            Assertions.fail("TEST FAILURE ----->" + j);
+            //return false;
         }
-        catch (TestException | DiscoveryException e){
-            
-             Logger.detail("TEST FAILURE ----->" + j);
-            return false;
-        }            
-        
-        return true;
+        thisUnit.testCompleted(true, "success!");
+
+        Logger.detail("OK");
+        Logger.detail("OK");
     }
-    	/*----------------------------------------------------------------------------
-	testCase01
-	--------------------------------------------------------------------------
-	AUTHOR:	PDI
 
-	DESCRIPTION: Tests the discovery request on Ethernet;
-	
-	Security Level: None
+    /*----------------------------------------------------------------------------
+testCase01
+--------------------------------------------------------------------------
+AUTHOR:	PDI
 
-	------------------------------------------------------------------------------*/
-	public static void testCase01() throws TestException
-	{
-            String testCase = testBatch+"/"+"Test Case 01";
-		
-	// ---------------------- Code -------------------------------
-            try
-            {
-                Logger.testCase(testCase);
-						               
-	//#
-	//# Send a discovery request over Ethernet. 
-        //# The device replies providing the IP and port number of ethernet connection.
-	//# After discovery it is possible to send commands to the card via ethernet.
-        //# 
-                Logger.testCase("Test Discovery request over the ethernet");
-                
-                try {
-                        Device d = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET,3,2000);     
-                
-                        superA = new User(User.SUPER_ADM_ID, RemoteAuthenticator.SUPERA_INITIAL_KEY, d);                     
-                }
-                catch (DiscoveryException e)
-                {                    
-                }
-                
-                    // launch a ping
-                 thisDevice.ping();
-                 
-                    // Super A object personalization
-		superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);
-                
-                    // object created
-                User admin = new User(superA, User.USER_ROLE_ADMIN,"initialAdmin");	
-                        // object personalized
-                //for(int i=0; i<1000; i++)                
-                admin.updateKey("admin");
+DESCRIPTION: Tests the discovery request on Ethernet;
 
-                admin.syncroFields(admin);
-                        			
-        //#
-	//# Object deletion
-	//#                       
-                        admin.delete(superA);
-                        superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);
+Security Level: None
 
-		}
-		catch (CommandErrorException | ObjectException | IOException e)
-		{
-                    Logger.testResult(false);		
-                    TestException t = new TestException();
-                    throw t;
-		}
-		
-		Logger.testCase(testCase);
-		Logger.testResult(true);
-	}
-   	/*----------------------------------------------------------------------------
-	testCase02
-	--------------------------------------------------------------------------
-	AUTHOR:	PDI
+------------------------------------------------------------------------------*/
+    public static void testCase01() throws TestException {
 
-        DESCRIPTION: Check of discovery message information
-	
-	Security Level: None
 
-	------------------------------------------------------------------------------*/
-	public static void testCase02() throws TestException
-	{
+        String testCase = testBatch + "/" + "Test Case 01";
+
+        TestCase tc = new TestCase();
+        thisUnit.addTestCase(tc);
+        tc.setCaseTitle(testCase);
+        TestEventHandler.getInstance().subscribeAlone(tc);
+
+        // ---------------------- Code -------------------------------
+        try {
+            Logger.testCase(testCase);
+
+            //#
+            //# Send a discovery request over Ethernet.
+            //# The device replies providing the IP and port number of ethernet connection.
+            //# After discovery it is possible to send commands to the card via ethernet.
+            //#
+            Logger.testCase("Test Discovery request over the ethernet");
+
+            try {
+                Device d = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET, 3, 2000);
+
+                superA = new User(User.SUPER_ADM_ID, RemoteAuthenticator.SUPERA_INITIAL_KEY, d);
+            } catch (DiscoveryException ignored) {
+            }
+
+            // launch a ping
+            thisDevice.ping();
+
+            // Super A object personalization
+            superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);
+
+            // object created
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "initialAdmin");
+            // object personalized
+            //for(int i=0; i<1000; i++)
+            admin.updateKey("admin");
+
+            admin.syncroFields(admin);
+
+            //#
+            //# Object deletion
+            //#
+            admin.delete(superA);
+            superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);
+
+        } catch (CommandErrorException | ObjectException | IOException e) {
+            Logger.testResult(false);
+            tc.testCompleted(false, "fail");
+
+            throw new TestException();
+        }
+        tc.testCompleted(true, "success");
+
+        Logger.testCase(testCase);
+        Logger.testResult(true);
+    }
+
+    /*----------------------------------------------------------------------------
+ testCase02
+ --------------------------------------------------------------------------
+ AUTHOR:	PDI
+
+     DESCRIPTION: Check of discovery message information
+
+ Security Level: None
+
+ ------------------------------------------------------------------------------*/
+    public static void testCase02() throws TestException {
 
  /*           String testCase = testBatch+"/"+"Test Case 02";
 		
@@ -197,157 +220,152 @@ public class TestDiscovery001 {
 		catch (CommandErrorException | ObjectException | IOException e)
 		{
                     Logger.testResult(false);		
-                    TestException t = new TestException();
-                    throw t;
+                    throw new TestException();
 		}
 		
 		Logger.testCase(testCase);
 		Logger.testResult(true);*/
-	}
-    	/*----------------------------------------------------------------------------
-	testCase03
-	--------------------------------------------------------------------------
-	AUTHOR:	PDI
+    }
 
-	DESCRIPTION: Tests that discovery message report the correct information;
-	
-	Security Level: None
+    /*----------------------------------------------------------------------------
+testCase03
+--------------------------------------------------------------------------
+AUTHOR:	PDI
 
-	------------------------------------------------------------------------------*/
-	public static void testCase03() throws TestException
-	{
-            DatagramSocket socket;
-            byte[] tx, rx;
-            BerTlv discovery;
-            InetAddress ip;
-            Atlv out;    
-            String testCase = testBatch+"/"+"Test Case 03";
-		
-	// ---------------------- Code -------------------------------
-            try
-            {
-                Logger.testCase(testCase);
-						               
-	//#
-	//# Send a discovery request for Ethernet. 
-        //# The device replies with the discovery message
-        //# items in the discovery message are checked
-        //#         
-                Logger.testCase("Test Discovery request over the ethernet: Items in discovery message are as expected");
-                
+DESCRIPTION: Tests that discovery message report the correct information;
+
+Security Level: None
+
+------------------------------------------------------------------------------*/
+    public static void testCase03() throws TestException {
+        DatagramSocket socket;
+        byte[] tx, rx;
+        BerTlv discovery;
+        InetAddress ip;
+        Atlv out;
+        String testCase = testBatch + "/" + "Test Case 03";
+
+        TestCase tc = new TestCase();
+        thisUnit.addTestCase(tc);
+        tc.setCaseTitle(testCase);
+        TestEventHandler.getInstance().subscribeAlone(tc);
 
         // ---------------------- Code -------------------------------
-        
-                tx = new byte[256];
-                rx = new byte[256];
+        try {
+            Logger.testCase(testCase);
 
-                discovery = new BerTlv(Atlv.DATA_TAG_SYSTEM_PING);
-                discovery.addTlv(Atlv.DATA_TAG_APDU_COMMAND, Apdu.PING_APDU);
-                discovery.addTlv(Atlv.DATA_TAG_DEVICE_ID, deviceId);                        
-                discovery.addTlv(Atlv.DATA_TAG_BEARER, ConnectionDetails.BEARER_ETHERNET);
-                discovery.toArray(tx, 0);
+            //#
+            //# Send a discovery request for Ethernet.
+            //# The device replies with the discovery message
+            //# items in the discovery message are checked
+            //#
+            Logger.testCase("Test Discovery request over the ethernet: Items in discovery message are as expected");
 
-                    // broadcast ip address
-                ip = InetAddress.getByName("255.255.255.255");
 
-                Logger.response(discovery.toString(), "Discovery Request");
-                socket = new DatagramSocket();            
-                DatagramPacket packet = new DatagramPacket(tx, tx.length, ip, IoStream.DEFAULT_ETHERNET_UDP_PORT);
+            // ---------------------- Code -------------------------------
 
-                socket.send(packet);
+            tx = new byte[256];
+            rx = new byte[256];
 
-                    // add a timeout
-                socket.setSoTimeout(3000);
-            
+            discovery = new BerTlv(Atlv.DATA_TAG_SYSTEM_PING);
+            discovery.addTlv(Atlv.DATA_TAG_APDU_COMMAND, Apdu.PING_APDU);
+            discovery.addTlv(Atlv.DATA_TAG_DEVICE_ID, deviceId);
+            discovery.addTlv(Atlv.DATA_TAG_BEARER, ConnectionDetails.BEARER_ETHERNET);
+            discovery.toArray(tx, 0);
 
-                packet = new DatagramPacket(rx, 256);
-                socket.receive(packet);
-        
-                discovery = new BerTlv(rx, 0, Atlv.getLen(rx, 0));
-                Logger.response(discovery.toString(), "Discovery Response");
+            // broadcast ip address
+            ip = InetAddress.getByName("255.255.255.255");
 
-                    // host Name
-                out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_IP_ADDRESS);        
-                if(null == out)
-                {
-                    throw new TestException();
-                }   
-                    // port number
-                out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_PORT_NUM);        
-                if(null == out)
-                {
-                    throw new TestException();
-                }
+            Logger.response(discovery.toString(), "Discovery Request");
+            socket = new DatagramSocket();
+            DatagramPacket packet = new DatagramPacket(tx, tx.length, ip, IoStream.DEFAULT_ETHERNET_UDP_PORT);
 
-                    // Device Identifier
-                out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_DEVICE_ID);        
-                if(null == out)
-                {
-                    throw new TestException();
-                }
+            socket.send(packet);
 
-                    // Name
-                out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_NAME);        
-                if(null == out)
-                {
-                    throw new TestException();
-                }
-                
-                    // Time                    
-                out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_SYSTEM_TIME);        
-                if(null == out)
-                {
-                    throw new TestException();
-                }
-                
-                out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_BEARER);        
-                if(null == out)
-                {
-                    throw new TestException();
-                }
+            // add a timeout
+            socket.setSoTimeout(3000);
 
-                    // DATA_TAG_HW_VER                    
-                out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_HW_VER);        
-                if(null == out)
-                {
-                    throw new TestException();
-                }
 
-                    // DATA_TAG_OS_VER                    
-                out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_HW_VER);        
-                if(null == out)
-                {
-                    throw new TestException();
-                }                     
-                
-                        			
-        //#
-	//# Object deletion
-	//#                       
+            packet = new DatagramPacket(rx, 256);
+            socket.receive(packet);
 
-		}
-		catch ( IOException | TestException e)
-		{
-                    Logger.testResult(false);		
-                    TestException t = new TestException();
-                    throw t;
-		}
-		
-		Logger.testCase(testCase);
-		Logger.testResult(true);
-	}
-    	/*----------------------------------------------------------------------------
-	testCase04
-	--------------------------------------------------------------------------
-	AUTHOR:	PDI
+            discovery = new BerTlv(rx, 0, Atlv.getLen(rx, 0));
+            Logger.response(discovery.toString(), "Discovery Response");
 
-	DESCRIPTION: Tests that Wifi discovery message over Ethernet reports the correct information;
-	
-	Security Level: None
+            // host Name
+            out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_IP_ADDRESS);
+            if (null == out) {
+                throw new TestException();
+            }
+            // port number
+            out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_PORT_NUM);
+            if (null == out) {
+                throw new TestException();
+            }
 
-	------------------------------------------------------------------------------*/
-	public static void testCase04() throws TestException
-	{
+            // Device Identifier
+            out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_DEVICE_ID);
+            if (null == out) {
+                throw new TestException();
+            }
+
+            // Name
+            out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_NAME);
+            if (null == out) {
+                throw new TestException();
+            }
+
+            // Time
+            out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_SYSTEM_TIME);
+            if (null == out) {
+                throw new TestException();
+            }
+
+            out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_BEARER);
+            if (null == out) {
+                throw new TestException();
+            }
+
+            // DATA_TAG_HW_VER
+            out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_HW_VER);
+            if (null == out) {
+                throw new TestException();
+            }
+
+            // DATA_TAG_OS_VER
+            out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_HW_VER);
+            if (null == out) {
+                throw new TestException();
+            }
+
+
+            //#
+            //# Object deletion
+            //#
+
+        } catch (IOException | TestException e) {
+            Logger.testResult(false);
+            tc.testCompleted(false, "fail");
+
+            throw new TestException();
+        }
+        tc.testCompleted(true, "success");
+
+        Logger.testCase(testCase);
+        Logger.testResult(true);
+    }
+
+    /*----------------------------------------------------------------------------
+testCase04
+--------------------------------------------------------------------------
+AUTHOR:	PDI
+
+DESCRIPTION: Tests that Wifi discovery message over Ethernet reports the correct information;
+
+Security Level: None
+
+------------------------------------------------------------------------------*/
+    public static void testCase04() throws TestException {
 /*            DatagramSocket socket;
             byte[] tx, rx;
             BerTlv discovery;
@@ -461,25 +479,24 @@ public class TestDiscovery001 {
 		catch ( IOException | TestException e)
 		{
                     Logger.testResult(false);		
-                    TestException t = new TestException();
-                    throw t;
+                    throw new TestException();
 		}
 		
 		Logger.testCase(testCase);
 		Logger.testResult(true);*/
-	} 
-   	/*----------------------------------------------------------------------------
-	testCase05
-	--------------------------------------------------------------------------
-	AUTHOR:	PDI
+    }
 
-	DESCRIPTION: Tests that Wifi discovery message report the correct information;
-	
-	Security Level: None
+    /*----------------------------------------------------------------------------
+ testCase05
+ --------------------------------------------------------------------------
+ AUTHOR:	PDI
 
-	------------------------------------------------------------------------------*/
-	public static void testCase05() throws TestException
-	{
+ DESCRIPTION: Tests that Wifi discovery message report the correct information;
+
+ Security Level: None
+
+ ------------------------------------------------------------------------------*/
+    public static void testCase05() throws TestException {
   /*          DatagramSocket socket;
             byte[] tx, rx;
             BerTlv discovery;
@@ -594,169 +611,161 @@ public class TestDiscovery001 {
 		catch ( IOException | TestException e)
 		{
                     Logger.testResult(false);		
-                    TestException t = new TestException();
-                    throw t;
+                    throw new TestException();
 		}
 		
 		Logger.testCase(testCase);
 		Logger.testResult(true);*/
-	} 
-   	/*----------------------------------------------------------------------------
-	testCase05
-	--------------------------------------------------------------------------
-	AUTHOR:	PDI
+    }
 
-	DESCRIPTION: Tests that Ethernet discovery message report the correct information;
-	
-	Security Level: None
+    /*----------------------------------------------------------------------------
+ testCase05
+ --------------------------------------------------------------------------
+ AUTHOR:	PDI
 
-	------------------------------------------------------------------------------*/
-	public static void testCase06() throws TestException
-	{
-            DatagramSocket socket;
-            byte[] tx, rx;
-            BerTlv discovery;
-            InetAddress ip;
-            Atlv out;    
-            String testCase = testBatch+"/"+"Test Case 06";
-		
-	// ---------------------- Code -------------------------------
-            try
-            {
-                Logger.testCase(testCase);
-						               
-	//#
-	//# Send a discovery request for Ethernet. 
-        //# The device replies with the discovery message
-        //# items in the discovery message are checked
-        //#         
-                Logger.testCase("Test Discovery request over Ethernet: Items in discovery message are as expected");
-                
+ DESCRIPTION: Tests that Ethernet discovery message report the correct information;
+
+ Security Level: None
+
+ ------------------------------------------------------------------------------*/
+    public static void testCase06() throws TestException {
+        DatagramSocket socket;
+        byte[] tx, rx;
+        BerTlv discovery;
+        InetAddress ip;
+        Atlv out;
+        String testCase = testBatch + "/" + "Test Case 06";
+
+        TestCase tc = new TestCase();
+        thisUnit.addTestCase(tc);
+        tc.setCaseTitle(testCase);
+        TestEventHandler.getInstance().subscribeAlone(tc);
 
         // ---------------------- Code -------------------------------
-        
-                tx = new byte[256];
-                rx = new byte[256];
+        try {
+            Logger.testCase(testCase);
 
-                discovery = new BerTlv(Atlv.DATA_TAG_SYSTEM_PING);
-                discovery.addTlv(Atlv.DATA_TAG_APDU_COMMAND, Apdu.PING_APDU);
-                discovery.addTlv(Atlv.DATA_TAG_DEVICE_ID, deviceId);                        
-                discovery.addTlv(Atlv.DATA_TAG_BEARER, ConnectionDetails.BEARER_ETHERNET);
-                discovery.toArray(tx, 0);
+            //#
+            //# Send a discovery request for Ethernet.
+            //# The device replies with the discovery message
+            //# items in the discovery message are checked
+            //#
+            Logger.testCase("Test Discovery request over Ethernet: Items in discovery message are as expected");
 
-                    // broadcast ip address
-                ip = InetAddress.getByName("255.255.255.255");
 
-                discovery.toString();
-                Logger.response(discovery.toString(), "Discovery Request");
-                socket = new DatagramSocket();            
-                DatagramPacket packet = new DatagramPacket(tx, tx.length, ip, IoStream.DEFAULT_ETHERNET_UDP_PORT);
+            // ---------------------- Code -------------------------------
 
-                socket.send(packet);
+            tx = new byte[256];
+            rx = new byte[256];
 
-                    // add a timeout
-                socket.setSoTimeout(3000);
-            
+            discovery = new BerTlv(Atlv.DATA_TAG_SYSTEM_PING);
+            discovery.addTlv(Atlv.DATA_TAG_APDU_COMMAND, Apdu.PING_APDU);
+            discovery.addTlv(Atlv.DATA_TAG_DEVICE_ID, deviceId);
+            discovery.addTlv(Atlv.DATA_TAG_BEARER, ConnectionDetails.BEARER_ETHERNET);
+            discovery.toArray(tx, 0);
 
-                packet = new DatagramPacket(rx, 256);
-                socket.receive(packet);
-        
-                discovery = new BerTlv(rx, 0, Atlv.getLen(rx, 0));
-                Logger.response(discovery.toString(), "Discovery Response");
+            // broadcast ip address
+            ip = InetAddress.getByName("255.255.255.255");
 
-                    // host Name
-                out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_IP_ADDRESS);        
-                if(null == out)
-                {
-                    Logger.detail("Missing IP address");
-                    throw new TestException();
-                }   
-                    // port number
-                out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_PORT_NUM);        
-                if(null == out)
-                {
-                    Logger.detail("Missing port Number");
-                    throw new TestException();
-                }
+            Logger.response(discovery.toString(), "Discovery Request");
+            socket = new DatagramSocket();
+            DatagramPacket packet = new DatagramPacket(tx, tx.length, ip, IoStream.DEFAULT_ETHERNET_UDP_PORT);
 
-                    // Device Identifier
-                out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_DEVICE_ID);        
-                if(null == out)
-                {
-                    Logger.detail("Missing Device ID");                    
-                    throw new TestException();
-                }
+            socket.send(packet);
 
-                    // Name
-                out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_NAME);        
-                if(null == out)
-                {
-                    Logger.detail("Missing Name");                     
-                    throw new TestException();
-                }
-                
-                    // Time                    
-                out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_SYSTEM_TIME);        
-                if(null == out)
-                {
-                    Logger.detail("Missing System Time"); 
-                    throw new TestException();
-                }
-                
-                out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_BEARER);        
-                if(null == out)
-                {
-                    Logger.detail("Missing Bearer");                     
-                    throw new TestException();
-                }
-                
+            // add a timeout
+            socket.setSoTimeout(3000);
 
-                    // DATA_TAG_HW_VER                    
-                out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_HW_VER);        
-                if(null == out)
-                {
-                    Logger.detail("Missing HW Ver");                     
-                    throw new TestException();
-                }
 
-                    // DATA_TAG_OS_VER                    
-                out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_OS_VER);        
-                if(null == out)
-                {
-                    Logger.detail("Missing OS Ver");                     
-                    throw new TestException();
-                }
-                    // DATA_TAG_APP_VER                    
-                out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_APP_VER);        
-                if(null == out)
-                {
-                    Logger.detail("Missing APP Ver");                     
-                    throw new TestException();
-                }
+            packet = new DatagramPacket(rx, 256);
+            socket.receive(packet);
 
-                    // DATA_TAG_APP_PACK                    
-                out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_APP_PACK);        
-                if(null == out)
-                {
-                    Logger.detail("Missing APP Pack");                     
-                    throw new TestException();
-                }                  
-                
-                        			
-        //#
-	//# Object deletion
-	//#                       
+            discovery = new BerTlv(rx, 0, Atlv.getLen(rx, 0));
+            Logger.response(discovery.toString(), "Discovery Response");
 
-		}
-		catch ( IOException | TestException e)
-		{
-                    Logger.testResult(false);		
-                    TestException t = new TestException();
-                    throw t;
-		}
-		
-		Logger.testCase(testCase);
-		Logger.testResult(true);
-	}          
+            // host Name
+            out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_IP_ADDRESS);
+            if (null == out) {
+                Logger.detail("Missing IP address");
+                throw new TestException();
+            }
+            // port number
+            out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_PORT_NUM);
+            if (null == out) {
+                Logger.detail("Missing port Number");
+                throw new TestException();
+            }
+
+            // Device Identifier
+            out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_DEVICE_ID);
+            if (null == out) {
+                Logger.detail("Missing Device ID");
+                throw new TestException();
+            }
+
+            // Name
+            out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_NAME);
+            if (null == out) {
+                Logger.detail("Missing Name");
+                throw new TestException();
+            }
+
+            // Time
+            out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_SYSTEM_TIME);
+            if (null == out) {
+                Logger.detail("Missing System Time");
+                throw new TestException();
+            }
+
+            out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_BEARER);
+            if (null == out) {
+                Logger.detail("Missing Bearer");
+                throw new TestException();
+            }
+
+
+            // DATA_TAG_HW_VER
+            out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_HW_VER);
+            if (null == out) {
+                Logger.detail("Missing HW Ver");
+                throw new TestException();
+            }
+
+            // DATA_TAG_OS_VER
+            out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_OS_VER);
+            if (null == out) {
+                Logger.detail("Missing OS Ver");
+                throw new TestException();
+            }
+            // DATA_TAG_APP_VER
+            out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_APP_VER);
+            if (null == out) {
+                Logger.detail("Missing APP Ver");
+                throw new TestException();
+            }
+
+            // DATA_TAG_APP_PACK
+            out = discovery.lookUpFirstTlvOccurrence(Atlv.DATA_TAG_APP_PACK);
+            if (null == out) {
+                Logger.detail("Missing APP Pack");
+                throw new TestException();
+            }
+
+
+            //#
+            //# Object deletion
+            //#
+
+        } catch (IOException | TestException e) {
+            Logger.testResult(false);
+            tc.testCompleted(false, "fail");
+
+            throw new TestException();
+        }
+        tc.testCompleted(true, "success");
+
+        Logger.testCase(testCase);
+        Logger.testResult(true);
+    }
 }
 

@@ -1,9 +1,17 @@
-package TestCases;
+package com.sdk;
 
-import com.sdk.*;
+
 import java.io.IOException;
-import java.util.*;
 
+import com.testlog.TestCase;
+import com.testlog.TestEventHandler;
+import com.testlog.TestUnit;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
+import java.util.*;
+import com.testlog.*;
+
+@SuppressWarnings("unused")
 public class TestUser002 {
     
     /********************************
@@ -14,11 +22,14 @@ public class TestUser002 {
     /********************************
     Public Methods
     ********************************/
-    public static final String deviceId = MainTest.TestMain.deviceId;
+    public static final String deviceId =  TestMain.deviceId;
        
     public static User superA;
     
     public static Device thisDevice;
+
+    private static final TestUnit thisUnit = new TestUnit();
+
 
     /*----------------------------------------------------------------------------
     run
@@ -30,8 +41,11 @@ public class TestUser002 {
     Security Level: None
 
     ------------------------------------------------------------------------------*/
-    public static boolean run()
-    {	
+    @Test
+	public void run()
+    {
+        thisUnit.setTestTitle(testBatch);
+
         int j;
        // ---------------------- Code -------------------------------        
         
@@ -40,7 +54,7 @@ public class TestUser002 {
         j = 1;
         try {
             thisDevice = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET, 3,2000);
-
+            thisUnit.setDevice(thisDevice);
             superA = new User(User.SUPER_ADM_ID, RemoteAuthenticator.SUPERA_INITIAL_KEY, thisDevice); 
 
             testCase01();
@@ -53,11 +67,15 @@ public class TestUser002 {
             j++;            
         }
         catch (TestException | DiscoveryException e){
-            Logger.detail("TEST FAILURE ----->" + j);            
-            return false;
-        }         
+            thisUnit.testCompleted(false, "failure at test case " + j);
 
-        return true;
+            Logger.detail("TEST FAILURE ----->" + j);            
+             Assertions.fail("TEST FAILURE ----->" + j);
+	//return false;
+        }
+        thisUnit.testCompleted(true, "success!");
+
+        Logger.detail("OK");
     }
 
         /*----------------------------------------------------------------------------
@@ -77,6 +95,10 @@ public class TestUser002 {
         int policyListSize, i;
 
         String testCode = testBatch+"/"+"Test Case 01";
+        TestCase tc = new TestCase();
+        thisUnit.addTestCase(tc);
+        tc.setCaseTitle(testCode);
+        TestEventHandler.getInstance().subscribeAlone(tc);
 
         // ---------------------- Code -------------------------------
         result = true;
@@ -156,10 +178,12 @@ public class TestUser002 {
         }
         catch (CommandErrorException | ObjectException | TestException | IOException e)
         {
-                result = false;
-                TestException t = new TestException();
-                throw t;
+                //result = false;
+            tc.testCompleted(false, "fail");
+
+            throw new TestException();
         }
+        tc.testCompleted(true, "success");
 
         Logger.testCase(testCode);
         Logger.testResult(result);
@@ -179,7 +203,6 @@ public class TestUser002 {
     public static boolean testCase02() throws TestException
     {
         boolean result;
-        Command command = new Command();
         ArrayList<PolicyLink> policyList, policyList1;
         int policyListSize, i, j;
         AccessPolicy policy;
@@ -187,6 +210,11 @@ public class TestUser002 {
         String doorId, policyId;
 
         String testCode = testBatch+"/"+"Test Case 02";
+
+        TestCase tc = new TestCase();
+        thisUnit.addTestCase(tc);
+        tc.setCaseTitle(testCode);
+        TestEventHandler.getInstance().subscribeAlone(tc);
 
         // ---------------------- Code -------------------------------
         result = true;
@@ -268,7 +296,7 @@ public class TestUser002 {
             policyList = user.getPolicyList();
             
             doorId = door.getObjectId();
-            policyId =  policy.getObjectId();
+            //policyId =  policy.getObjectId();
 
             policyListSize = policyList.size();
             for (i = 0; i< policyListSize; i++){
@@ -304,7 +332,7 @@ public class TestUser002 {
             policyList = user.getPolicyList();
             
             doorId = door.getObjectId();
-            policyId =  policy.getObjectId();
+            //policyId =  policy.getObjectId();
 
             policyListSize = policyList.size();
             for (i = 0; i< policyListSize; i++){
@@ -341,10 +369,12 @@ public class TestUser002 {
         }
         catch (CommandErrorException | ObjectException | TestException | IOException e)
         {
-                result = false;
-                TestException t = new TestException();
-                throw t;
+                //result = false;
+            tc.testCompleted(false, "fail");
+
+            throw new TestException();
         }
+        tc.testCompleted(true, "success");
 
         Logger.testCase(testCode);
         Logger.testResult(result);
@@ -373,6 +403,11 @@ public class TestUser002 {
         int policyListSize;
         
         String testCode = testBatch+"/"+"Test Case 04";
+
+        TestCase tc = new TestCase();
+        thisUnit.addTestCase(tc);
+        tc.setCaseTitle(testCode);
+        TestEventHandler.getInstance().subscribeAlone(tc);
 
         // ---------------------- Code -------------------------------
         result = true;
@@ -448,7 +483,7 @@ public class TestUser002 {
                      // convert policy List into a string
                  a = "";
                  for (j=0; j<policyList.size(); j++){
-                     a += policyList.get(j).toString();
+                     a = a.concat(policyList.get(j).toString());
                  }
                 
                 apdu.addTlv(Atlv.DATA_TAG_USER_POLICY_LIST, a);
@@ -493,7 +528,7 @@ public class TestUser002 {
                      // convert policy List into a string
                  a = "";
                  for (j=0; j<policyList.size(); j++){
-                     a += policyList.get(j).toString();
+                     a = a.concat(policyList.get(j).toString());
                  }
                 
                 apdu.addTlv(Atlv.DATA_TAG_USER_POLICY_LIST, a);
@@ -538,7 +573,7 @@ public class TestUser002 {
                      // convert policy List into a string
                  a = "";
                  for (j=0; j<policyList.size(); j++){
-                     a += policyList.get(j).toString();
+                     a = a.concat(policyList.get(j).toString());
                  }
                 
                 apdu.addTlv(Atlv.DATA_TAG_USER_POLICY_LIST, a);
@@ -583,7 +618,7 @@ public class TestUser002 {
                      // convert policy List into a string
                  a = "";
                  for (j=0; j<policyList.size(); j++){
-                     a += policyList.get(j).toString();
+                     a = a.concat(policyList.get(j).toString());
                  }
                 
                 apdu.addTlv(Atlv.DATA_TAG_USER_POLICY_LIST, a);
@@ -616,10 +651,13 @@ public class TestUser002 {
         }
         catch (CommandErrorException | ObjectException | IOException e)
         {
-                result = false;
-                TestException t = new TestException();
-                throw t;                                
+                //result = false;
+            tc.testCompleted(false, "fail");
+
+            throw new TestException();
+
         }
+        tc.testCompleted(true, "success");
 
         Logger.testCase(testCode);
         Logger.testResult(result);

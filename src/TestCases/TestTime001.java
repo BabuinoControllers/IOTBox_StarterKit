@@ -1,23 +1,33 @@
-package TestCases;
+package com.sdk;
 
-import com.sdk.*;
+
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.Calendar;
 
+import com.testlog.TestCase;
+import com.testlog.TestEventHandler;
+import com.testlog.TestUnit;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
+import java.util.Calendar;
+import com.testlog.*;
+
+@SuppressWarnings("unused")
 public class TestTime001 {
     
     /********************************
     PUBLIC Fields
     ********************************/
     public static final String testBatch = "TestTime001";
-    public static final String deviceId = MainTest.TestMain.deviceId;
+    public static final String deviceId =  TestMain.deviceId;
 
     /********************************
     Public Methods
     ********************************/
     public static SuperA superA;  
     public static Device thisDevice;
+
+    private static final TestUnit thisUnit = new TestUnit();
+
 
     /*----------------------------------------------------------------------------
     run
@@ -29,8 +39,11 @@ public class TestTime001 {
     Security Level: None
 
     ------------------------------------------------------------------------------*/
-    public static boolean run()
-    {	
+    @Test
+	public void run()
+    {
+        thisUnit.setTestTitle(testBatch);
+
         int j;
        // ---------------------- Code -------------------------------        
         
@@ -38,8 +51,10 @@ public class TestTime001 {
        
        j = 1;
         try {
-                thisDevice = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET,3,2000);     
-                
+                thisDevice = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET,3,2000);
+
+            thisUnit.setDevice(thisDevice);
+
                 superA = new SuperA(RemoteAuthenticator.SUPERA_INITIAL_KEY, thisDevice);                
                 
                 for (int u = 0; u<1; u++)
@@ -50,29 +65,18 @@ public class TestTime001 {
                     testCase02();
                     j++;
 
-                    if (u == 0)
-                    {
-                       /* Logger.detail("<-------------------------------->");
-                        Logger.detail("<-------------------------------->"); 
-                        Logger.detail("<-------------------------------->"); 
-                        Logger.detail(" WIFI "); 
-                        Logger.detail("<-------------------------------->"); 
-                        Logger.detail("<-------------------------------->"); 
-                        Logger.detail("<-------------------------------->"); 
-                       
-                        thisDevice = Device.discover(deviceId, Device.WIFI);
-                        IoStream.setActiveDevice(thisDevice);
-                        j=1;*/
-                    }      
+
                 }
         }
         catch (TestException | DiscoveryException e){
-            
-             Logger.detail("TEST FAILURE ----->" + j);
-            return false;
-        }            
-        
-        return true;
+            thisUnit.testCompleted(false, "failure at test case " + j);
+
+            Logger.detail("TEST FAILURE ----->" + j);
+             Assertions.fail("TEST FAILURE ----->" + j);
+	//return false;
+        }
+        thisUnit.testCompleted(true, "success!");
+        Logger.detail("OK");
     }
     /*******************************************************************************
      * testCase01: It checks that get time and get date commands return correct values
@@ -81,7 +85,13 @@ public class TestTime001 {
      ********************************************************************************/    
     public static void testCase01() throws TestException
     {
-        String testCase = testBatch +" /" + "Test Case 01";               
+        TestCase tc = new TestCase();
+        thisUnit.addTestCase(tc);
+        TestEventHandler.getInstance().subscribeAlone(tc);
+
+        String testCase = testBatch +" /" + "Test Case 01";
+        tc.setCaseTitle(testCase);
+
         Calendar c, c1;
         // ---------------------- Code -------------------------------
         try
@@ -112,8 +122,7 @@ public class TestTime001 {
                 (c1.get(Calendar.MONTH) != c.get(Calendar.MONTH)) ||
                 (c1.get(Calendar.YEAR) != c.get(Calendar.YEAR)))
             {		
-                TestException t = new TestException();
-                throw t;
+                throw new TestException();
             }
 
     //#
@@ -124,23 +133,22 @@ public class TestTime001 {
                 // wait 10s;
             try{
                 Thread.sleep(10000);
-            } catch (InterruptedException e) 
+            } catch (InterruptedException ignored)
             {
             }
                 // get time and date
             c = thisDevice.getTimeAndDate();
-            
-            long a = c.getTimeInMillis();
-            long b = c1.getTimeInMillis();
 
-            long deltaT = (long)c.getTimeInMillis()- (long)c1.getTimeInMillis();                
+            //long a = c.getTimeInMillis();
+            //long b = c1.getTimeInMillis();
+
+            long deltaT = c.getTimeInMillis() - c1.getTimeInMillis();
 
             if (!((9000 <= deltaT) &&
                 (deltaT <=11000)))
             {	
                 Logger.detail("Delta Time :" + deltaT);
-                TestException t = new TestException();
-                throw t;
+                throw new TestException();
             }
 
     //#
@@ -151,12 +159,13 @@ public class TestTime001 {
             }
             catch (CommandErrorException | ObjectException | IOException | TestException e)
             {
-                Logger.testResult(false);		
-                TestException t = new TestException();
-                throw t;
-            }
+                Logger.testResult(false);
+                tc.testCompleted(false, "fail");
 
-            Logger.testCase(testCase);
+                throw new TestException();
+            }
+        tc.testCompleted(true, "success");
+        Logger.testCase(testCase);
             Logger.testResult(true);
     }
 /*******************************************************************************
@@ -166,8 +175,14 @@ public class TestTime001 {
      ********************************************************************************/    
     public static void testCase02() throws TestException
     {
+        TestCase tc = new TestCase();
+        thisUnit.addTestCase(tc);
+        TestEventHandler.getInstance().subscribeAlone(tc);
+
         Command command = new Command();
-        String testCase = testBatch +" /" + "Test Case 02";               
+        String testCase = testBatch +" /" + "Test Case 02";
+        tc.setCaseTitle(testCase);
+
         String expectedRes;
         // ---------------------- Code -------------------------------
         try
@@ -243,12 +258,12 @@ public class TestTime001 {
             }
             catch (CommandErrorException | ObjectException | IOException e)
             {
-                Logger.testResult(false);		
-                TestException t = new TestException();
-                throw t;
+                Logger.testResult(false);
+                tc.testCompleted(false, "fail");
+                throw new TestException();
             }
-
-            Logger.testCase(testCase);
+        tc.testCompleted(true, "success");
+        Logger.testCase(testCase);
             Logger.testResult(true);
     }    
         
