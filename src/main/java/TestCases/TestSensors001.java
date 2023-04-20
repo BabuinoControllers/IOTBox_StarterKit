@@ -29,7 +29,7 @@ public class TestSensors001 {
 //     PUBLIC Fields
 //     ********************************/
     public static final String testBatch = "TestSensors001";
-    public static final String deviceId = TestMain.deviceId;
+    public static final String deviceId = MainTest.TestMain.deviceId;
 
     //    /********************************
 //     PUBLIC Methods

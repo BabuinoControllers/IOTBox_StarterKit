@@ -21,7 +21,7 @@ public class TestDigitalFunctionBlock001 {
 //     PUBLIC Fields
 //     ********************************/
     public static final String testBatch = "TestFiniteStateMachine001";
-    public static final String deviceId = TestMain.deviceId;
+    public static final String deviceId = MainTest.TestMain.deviceId;
     public static final String pinTest = "31323334";
 
     public static SuperA superA;

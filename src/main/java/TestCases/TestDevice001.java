@@ -18,7 +18,7 @@ public class TestDevice001 {
 //     PUBLIC Fields
 //     ********************************/
     public static final String testBatch = "TestDevice01";
-    public static final String deviceId = TestMain.deviceId;
+    public static final String deviceId = MainTest.TestMain.deviceId;
 
     //    /********************************
 //     PUBLIC Methods

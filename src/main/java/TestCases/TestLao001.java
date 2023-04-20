@@ -33,7 +33,7 @@ public class TestLao001 {
     // PUBLIC Fields
     // ********************************
     public static final String testBatch = "TestLao001";
-    public static final String deviceId = TestMain.deviceId;
+    public static final String deviceId = MainTest.TestMain.deviceId;
     // ********************************
     // Public Methods
     // ********************************

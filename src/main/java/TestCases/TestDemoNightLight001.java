@@ -403,7 +403,7 @@ public class TestDemoNightLight001 {
            String pin = "31313131";
            device.systemFactoryReset(pin, superA, true);
 
-       } catch (CommandErrorException | ObjectException | IOException | DiscoveryException e) {
+       } catch (CommandErrorException | IOException | DiscoveryException e) {
            Logger.testResult(false);
            throw new TestException();
        }

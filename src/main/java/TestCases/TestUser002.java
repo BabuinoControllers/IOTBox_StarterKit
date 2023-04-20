@@ -23,7 +23,7 @@ public class TestUser002 {
     /********************************
     Public Methods
     ********************************/
-    public static final String deviceId =  TestMain.deviceId;
+    public static final String deviceId =  MainTest.TestMain.deviceId;
        
     public static User superA;
     

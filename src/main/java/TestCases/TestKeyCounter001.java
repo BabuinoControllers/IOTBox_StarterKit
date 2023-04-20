@@ -12,18 +12,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
 @SuppressWarnings("unused")
-public class TestMemoryUnlock001 {
+public class TestKeyCounter001 {
 
 //    /********************************
 //     PUBLIC Fields
 //     ********************************/
-    public static final String testBatch = "TestMemoryUnlock001";
-    public static final String deviceId = TestMain.deviceId;
+    public static final String testBatch = "TestKeyCounter001";
+    public static final String deviceId = MainTest.TestMain.deviceId;
 
 //    /********************************
 //     PUBLIC Methods
 //     ********************************/
-    public static SuperA superA;
+    public static User superA;
     public static Device thisDevice;
 
     private static final TestUnit thisUnit = new TestUnit();
@@ -41,34 +41,40 @@ public class TestMemoryUnlock001 {
     @Test
     public void run() {
         thisUnit.setTestTitle(testBatch);
-
         int j;
         // ---------------------- Code -------------------------------
 
         Command.onError = Command.ALT_ON_ERROR;
 
         j = 1;
+        superA = new User(User.SUPER_ADM_ID, RemoteAuthenticator.SUPERA_INITIAL_KEY);
+
         try {
             thisDevice = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET, 3, 2000);
 
             thisUnit.setDevice(thisDevice);
 
-            superA = new SuperA(RemoteAuthenticator.SUPERA_INITIAL_KEY, thisDevice);
+            superA = new User(User.SUPER_ADM_ID, RemoteAuthenticator.SUPERA_INITIAL_KEY, thisDevice);
 
             for (int u = 0; u < 1; u++) {
                 testCase01();
                 j++;
+
+                testCase02();
+                j++;
+
+                //thisDevice = Device.discover(deviceId, Device.WIFI);
+                //IoStream.setActiveDevice(thisDevice);
             }
         } catch (TestException | DiscoveryException e) {
             thisUnit.testCompleted(false, "failure at test case " + j);
             Logger.detail("TEST FAILURE ----->" + j);
             Assertions.fail("TEST FAILURE ----->" + j);
-
             //return false;
         }
         thisUnit.testCompleted(true, "success!");
-        Logger.detail("OK");
 
+        Logger.detail("OK");
     }
 
     /*----------------------------------------------------------------------------
@@ -76,7 +82,7 @@ testCase01
 --------------------------------------------------------------------------
 AUTHOR:	PDI
 
-DESCRIPTION: Memory Unlock
+DESCRIPTION: Check the transaction sequence. Onlty one User
 
 Security Level: None
 
@@ -85,109 +91,146 @@ Security Level: None
         TestCase tc = new TestCase();
         thisUnit.addTestCase(tc);
         TestEventHandler.getInstance().subscribeAlone(tc);
-        String pin;
+
+        RemoteAuthenticator a;
+        int x, y;
+        byte[] z;
+
         String testCase = testBatch + "/" + "Test Case 01";
         tc.setCaseTitle(testCase);
 
-        Apdu apdu;
-
-
-        Command c = new Command();
         // ---------------------- Code -------------------------------
         try {
             Logger.testCase(testCase);
 
             // ping
             thisDevice.ping();
-            pin = "01020304";
 
             // instantiate a local User object for the SUPER-A
             //User superA = new User(User.SUPER_ADM_ID, RemoteAuthenticator.SUPERA_INITIAL_KEY);
             // object personalized
             superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);
-            superA.setPin(superA, pin);
+            a = superA.getRemoteAuthenticatorObject();
 
             //#
-            //# Memory Unlock Success
-            //#
-            apdu = new Apdu("ACB50300");
-            apdu.addTlv(Atlv.DATA_TAG_PIN_DATA, pin);
-            apdu.addTlv((byte) 0xEB, "3132333435363738");
+            //# Check Counter Sequence
+            //# One User
 
-            // send command
-            c.description = "Memory Unlock";
-            c.requester = superA;
-            c.execute(apdu.toString(), Command.COMMAND_EXPECTED_SUCCESSFUL_RESPONSE);
+            Command.isStopOnSynchroError = true;
+
+            z = a.getKeyCounter();
+            y = ((z[5] & 0xFF) << 16) + ((z[6] & 0xFF) << 8) + (z[7] & 0xFF);
+            // object created
+            for (int i = 0; i < 300; i++) {
+                Logger.testCase("Attempt #" + i);
+                superA.syncroFields(superA);
+
+                z = a.getKeyCounter();
+                x = ((z[5] & 0xFF) << 16) + ((z[6] & 0xFF) << 8) + (z[7] & 0xFF);
+                y++;
+
+                if (x != y)
+                    throw new TestException();
+
+            }
+            Command.isStopOnSynchroError = false;
             //#
             //# Object deletion
             //#
-        } catch (CommandErrorException | ObjectException | IOException e) {
+        } catch (CommandErrorException | ObjectException | IOException | TestException e) {
             Logger.testResult(false);
             tc.testCompleted(false, "fail");
+
             throw new TestException();
         }
-        tc.testCompleted(true, "success");
+
         Logger.testCase(testCase);
         Logger.testResult(true);
+        tc.testCompleted(true, "success");
+
     }
 
     /*----------------------------------------------------------------------------
- testCase01
- --------------------------------------------------------------------------
- AUTHOR:	PDI
+testCase03
+--------------------------------------------------------------------------
+AUTHOR:	PDI
 
- DESCRIPTION: Memory Unlock
+DESCRIPTION: Check the transaction sequence. Two Users
 
- Security Level: None
+Security Level: None
 
- ------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------*/
     public static void testCase02() throws TestException {
         TestCase tc = new TestCase();
         thisUnit.addTestCase(tc);
         TestEventHandler.getInstance().subscribeAlone(tc);
 
-        String pin;
+        RemoteAuthenticator raoSuperA;
+        int sx, ax, sy, ay;
+        byte[] superATransactionCounter, adminTransactionCounter;
+
         String testCase = testBatch + "/" + "Test Case 02";
         tc.setCaseTitle(testCase);
 
-        Apdu apdu;
 
 
-        Command c = new Command();
         // ---------------------- Code -------------------------------
         try {
             Logger.testCase(testCase);
 
             // ping
             thisDevice.ping();
-            pin = "01020304";
 
             // instantiate a local User object for the SUPER-A
             //User superA = new User(User.SUPER_ADM_ID, RemoteAuthenticator.SUPERA_INITIAL_KEY);
             // object personalized
             superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);
-            superA.setPin(superA, pin);
+            raoSuperA = superA.getRemoteAuthenticatorObject();
+
+            User admin = new User(superA, User.USER_ROLE_ADMIN, "initialAdmin");
+            // object personalized
+            //for(int i=0; i<1000; i++)
+            admin.updateKey("admin");
 
             //#
-            //# Memory Unlock Success
-            //#
-            apdu = new Apdu("ACB50300");
-            apdu.addTlv(Atlv.DATA_TAG_PIN_DATA, pin);
-            apdu.addTlv((byte) 0xEB, "3232333435363738");
+            //# Check Counter Sequence
+            //# One User
 
-            String expectedRes = String.format("%02X", Atlv.DATA_TAG_RESPONSE) + "1A" +
-                    String.format("%02X", Atlv.DATA_TRANSACTION_COUNTER_TAG) + "08????????????????" +
-                    String.format("%02X", Atlv.DATA_TAG_APDU_RESPONSE) + "04" +                                                                                                        // tag															// Object ID
-                    Apdu.SW_6985_CONDITION_OF_USE_NOT_SATISFIED_TLV_STRING +
-                    String.format("%02X", Atlv.DATA_TAG_MAC) + "08????????????????";
-            // send command
-            c.description = "Memory Unlock Wrong UKey";
-            c.requester = superA;
-            c.execute(apdu.toString(), expectedRes);
+            Command.isStopOnSynchroError = true;
+
+            superATransactionCounter = raoSuperA.getKeyCounter();
+            adminTransactionCounter = raoSuperA.getKeyCounter();
+
+            sy = ((superATransactionCounter[5] & 0xFF) << 16) + ((superATransactionCounter[6] & 0xFF) << 8) + (superATransactionCounter[7] & 0xFF);
+            ay = ((adminTransactionCounter[5] & 0xFF) << 16) + ((adminTransactionCounter[6] & 0xFF) << 8) + (adminTransactionCounter[7] & 0xFF);
+            // object created
+            for (int i = 0; i < 300; i++) {
+                Logger.testCase("Attempt #" + i);
+
+                superA.syncroFields(superA);
+
+                superATransactionCounter = raoSuperA.getKeyCounter();
+                adminTransactionCounter = raoSuperA.getKeyCounter();
+
+                sx = ((superATransactionCounter[5] & 0xFF) << 16) + ((superATransactionCounter[6] & 0xFF) << 8) + (superATransactionCounter[7] & 0xFF);
+
+                sy++;
+                if (sx != sy)
+                    throw new TestException();
+
+                admin.syncroFields(admin);
+                ax = ((adminTransactionCounter[5] & 0xFF) << 16) + ((adminTransactionCounter[6] & 0xFF) << 8) + (adminTransactionCounter[7] & 0xFF);
+
+                ay++;
+
+                if (ax != ay)
+                    throw new TestException();
+            }
+            Command.isStopOnSynchroError = false;
             //#
             //# Object deletion
             //#
-        } catch (CommandErrorException | ObjectException | IOException e) {
+        } catch (CommandErrorException | ObjectException | IOException | TestException e) {
             Logger.testResult(false);
             tc.testCompleted(false, "fail");
 

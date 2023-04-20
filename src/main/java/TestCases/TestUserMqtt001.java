@@ -17,7 +17,7 @@ public class TestUserMqtt001 {
 //     PUBLIC Fields
 //     ********************************/
     public static final String testBatch = "TestUserMQTT001";
-    public static final String deviceId = TestMain.deviceId;
+    public static final String deviceId = MainTest.TestMain.deviceId;
     public static final String clientId = "3333333333";
 
     //public static final String hostName =  "54.76.137.235"; //mqtt cloud

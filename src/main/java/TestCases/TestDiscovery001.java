@@ -28,7 +28,7 @@ public class TestDiscovery001 {
 //     ********************************/
     public static User superA;
     public static Device thisDevice;
-    public static final String deviceId = TestMain.deviceId;
+    public static final String deviceId = MainTest.TestMain.deviceId;
 
     private static final TestUnit thisUnit = new TestUnit();
 
