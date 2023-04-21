@@ -4,152 +4,71 @@
  * and open the template in the editor.
  */
 package MainTest;
+
 import TestCases.*;
 
 /**
- *
  * @author g508853
  */
 public class TestMain {
-    
+
     // IMPORTANT
     // Copy serial number of your device here
-    public static String deviceId = "000000000000100E";
-   
-    public static void main(String[] args)
-    {  
-       boolean result;
-       
-      
-       /*result = TestHelloWord001.run();
-       if (!result){
-          System.exit(1);
-        }*/
-       
-       result = TestDemoNightLight001.run();
-       if (!result){
-          System.exit(1);
-        }
-    
-       // Uncomment to see other examples
-       
-  /*     result = TestUser001.run();
-       if (!result){
-          System.exit(1);
-        }
-       
-        result = TestUser002.run();
-       if (!result){
-          System.exit(1);
-        }
-              
-       result = TestAccessPolicy001.run();
-        if (!result){
-          System.exit(1);
-        }
-              
-       result = TestAccessPolicy002.run();  
-       if (!result){
-          System.exit(1);
-        }
-            
-       result = TestLao001.run();
-       if (!result){
-          System.exit(1);
-        }       
-              
-       result = TestLog001.run();                             
-       if (!result){
-          System.exit(1);
-        }
-       
-       result = TestDoor001.run();
-       if (!result){
-          System.exit(1);
-        }
-       
-       result = TestSensors001.run();
-      if (!result){
-          System.exit(1);
-        }
-        
-       result = TestDoorWithProximity001.run();
-       if (!result){
-          System.exit(1);
-        }
-  
-       result = TestPutDataOutput001.run();
-       if (!result){
-          System.exit(1);
-        }
-  
-       result = TestGetDataOutput001.run();       
-       if (!result){
-          System.exit(1);
-        }
-  
-     result = TestSystemReset001.run();
-       if (!result){
-          System.exit(1);
-        } 
-  
-       result = TestTime001.run();
-       if (!result){
-          System.exit(1);
-        }
-       
-        result = TestKeyCounter001.run();
-        if (!result){
-          System.exit(1);
-        }
-  
-        result = TestDiscovery001.run();
-        if (!result){
-          System.exit(1);
-        }   
-        
-            // MQTT test repeated three times.
-        for (int i = 0; i<3; i++){
-            result = TestUserMqtt001.run();
-            if (!result){
-              System.exit(1);
-            }
-        }
-        
-        result = TestDevice001.run();
-        if (!result){
-          System.exit(1);
-        }
-           
-        result = TestDigitalFunctionBlock001.run();
-        if (!result){
-          System.exit(1);
-        } 
-        
-       result = TestFiniteStateMachine001.run();
-        if (!result){
-          System.exit(1);
-        }     */
-       
-                      
-      
-    /* result =TestExtension001.run();
-        if (!result){
-          System.exit(1);
-        }
-              
-        result =TestExtenderWithCentralizedControl001.run();
-        if (!result){
-          System.exit(1);
-        }
-                      
-        result = TestBeacon001.run();       
-        if (!result){
-           System.exit(1);
-         }
-        */
-   
-    
+    public static String deviceId = "000000000000100F";
+
+    public static void main(String[] args) {
+
+        new TestHelloWord001().run();
+
+
+        // Uncomment to run other examples
+
+//        new TestDemoNightLight001().run();
+//
+//        new TestUser001().run();
+//
+//        new TestUser002().run();
+//
+//        new TestAccessPolicy001().run();
+//
+//        new TestAccessPolicy002().run();
+//
+//        new TestLao001().run();
+//
+//        new TestLog001().run();
+//
+//        new TestDoor001().run();
+//
+//        new TestSensors001().run();
+//
+//        new TestDoorWithProximity001().run();
+//
+//        new TestPutDataOutput001().run();
+//
+//        new TestGetDataOutput001().run();
+//
+//        new TestSystemReset001().run();
+//
+//        new TestTime001().run();
+//
+//        new TestKeyCounter001().run();
+//
+//        new TestDiscovery001().run();
+//
+//        // MQTT test repeated three times.
+//        for (int i = 0; i < 3; i++) {
+//            new TestUserMqtt001().run();
+//        }
+//
+//        new TestDevice001().run();
+//
+//        new TestDigitalFunctionBlock001().run();
+//
+//        new TestFiniteStateMachine001().run();
+//
+//        new TestBeacon001().run();
+
+
     }
-    
+
 }

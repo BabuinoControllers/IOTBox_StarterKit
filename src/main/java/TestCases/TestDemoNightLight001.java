@@ -3,6 +3,9 @@ package TestCases;
 import com.sdk.*;
     
 import com.sdk.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import java.io.IOException;
 
 public class TestDemoNightLight001 {
@@ -98,8 +101,9 @@ public class TestDemoNightLight001 {
     Security Level: None
 
     ------------------------------------------------------------------------------*/
-    public static boolean run()
-    {	
+    @Test
+    public void run()
+    {
         int j;
        // ---------------------- Code -------------------------------        
        Command.onError = Command.ALT_ON_ERROR;
@@ -133,10 +137,11 @@ public class TestDemoNightLight001 {
         }
         catch (TestException e){
                          Logger.detail("TEST FAILURE ----->" + j);
-            return false;
+                         Assertions.fail();
+            //return false;
         }            
         
-        return true;
+        //return true;
     }
     /*----------------------------------------------------------------------------
     configurationAndTelemetry

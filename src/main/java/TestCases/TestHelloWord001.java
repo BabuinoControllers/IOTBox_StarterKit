@@ -4,7 +4,7 @@ import com.sdk.*;
     
 import java.io.IOException;
 import javax.xml.bind.DatatypeConverter;
-
+import org.junit.jupiter.api.*;
 public class TestHelloWord001 {
     
  /********************************
@@ -28,7 +28,8 @@ public class TestHelloWord001 {
     Security Level: None
 
     ------------------------------------------------------------------------------*/
-    public static boolean run()
+    @Test
+    public void run()
     {	
         int j;
        // ---------------------- Code -------------------------------        
@@ -44,51 +45,51 @@ public class TestHelloWord001 {
                 {                                      
                     testCase06();
                     j++;
-                    
+
                     testCase07();
                     j++;
-                    
+
                     testCase08();
                     j++;
-                    
+
                     testCase09();
                     j++;
-                    
+
                     testCase10();
                     j++;
-                    
+
                     testCase11();
                     j++;
-                    
+
                     testCase12();
                     j++;
-                    
+
                   //  testCase13(); //Test wrong
                     j++;
-                    
+
                     testCase14();
                     j++;
-                    
+
                     testCase15();
                     j++;
-                    
+
                     testCase16();
                     j++;
 
                     testCase17();
                     j++;
 
-                    testCase18();                    
+                    testCase18();
                     j++;
-                    
-                    testCase19();                    
+
+                    testCase19();
                     j++;
-                    
-                    testCase20();                    
+
+                    testCase20();
                     j++;
-                    
-                    testCase21();                    
-                    j++;                   
+
+                    testCase21();
+                    j++;
 
                     testCase22();                    
                     j++;      
@@ -97,10 +98,11 @@ public class TestHelloWord001 {
         }
         catch (TestException | DiscoveryException e){
                          Logger.detail("TEST FAILURE ----->" + j);
-            return false;
+                         Assertions.fail();
+            //return false;
         }            
         
-        return true;
+        //return true;
     }
     /*----------------------------------------------------------------------------
     testCase06
