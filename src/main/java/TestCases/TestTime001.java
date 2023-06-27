@@ -51,7 +51,7 @@ public class TestTime001 {
         try {
                 thisDevice = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET,3,2000);
 
-            thisUnit.setDevice(thisDevice);
+                thisUnit.setDevice(thisDevice);
 
                 superA = new SuperA(RemoteAuthenticator.SUPERA_INITIAL_KEY, thisDevice);                
                 

@@ -1,7 +1,6 @@
 
 package TestCases;
-import com.sdk.*;
-    
+
 import com.sdk.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -50,7 +49,7 @@ public class TestDemoNightLight001 {
     /********************************
      Private Methods
      ********************************/
-    private static Device connect() throws DiscoveryException{
+    private static Device connect() throws DiscoveryException, IOException{
 
         Device  device;
 
@@ -77,6 +76,7 @@ public class TestDemoNightLight001 {
 
                 device = new Device();
                 device.setConnectionDetails(connectionDetails);
+                device.startCommandSession();
 
                 break;
 
