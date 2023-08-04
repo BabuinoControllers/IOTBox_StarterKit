@@ -83,7 +83,8 @@ public class TestDoorWithProximity001 {
                 j++;
 
             }
-        } catch (DiscoveryException e) {
+            superA.resetPin(superA);
+        } catch (DiscoveryException | CommandErrorException | IOException | ObjectException e) {
 
             Logger.detail("TEST FAILURE ----->" + j);
             thisUnit.testCompleted(false, "failure at test case " + j);

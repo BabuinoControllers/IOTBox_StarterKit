@@ -65,9 +65,9 @@ public class TestUser002 {
             j++;
 
             testCase04();
-            j++;            
-        }
-        catch (TestException | DiscoveryException e){
+            j++;
+            superA.resetPin(superA);
+        } catch (TestException | DiscoveryException | CommandErrorException | IOException | ObjectException e){
             thisUnit.testCompleted(false, "failure at test case " + j);
 
             Logger.detail("TEST FAILURE ----->" + j);            

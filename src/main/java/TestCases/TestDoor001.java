@@ -127,8 +127,8 @@ public class TestDoor001 {
                 j++;
 
 
-            }
-        } catch (TestException | DiscoveryException e) {
+            } superA.resetPin(superA);
+        } catch (TestException | DiscoveryException | CommandErrorException | IOException | ObjectException e){
             Logger.detail("TEST FAILURE ----->" + j);
             thisUnit.testCompleted(false, "failure at test case " + j);
 

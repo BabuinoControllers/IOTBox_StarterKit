@@ -63,8 +63,8 @@ public class TestPutDataOutput001 {
 
 
             }
-
-        } catch (TestException | DiscoveryException e) {
+            superA.resetPin(superA);
+        } catch (TestException | DiscoveryException | CommandErrorException | IOException | ObjectException e) {
             thisUnit.testCompleted(false, "failure at test case " + j);
 
             Logger.detail("TEST FAILURE ----->" + j);

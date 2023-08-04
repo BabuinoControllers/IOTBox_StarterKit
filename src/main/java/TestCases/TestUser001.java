@@ -127,7 +127,8 @@ public class TestUser001 {
 //                    //    j=1;
 //                }
             }
-        } catch (TestException | DiscoveryException e) {
+            superA.resetPin(superA);
+        } catch (TestException | DiscoveryException | CommandErrorException | IOException | ObjectException e) {
             Logger.detail("TEST FAILURE ----->" + j);
             thisUnit.testCompleted(false, "failure at test case " + j);
             Assertions.fail("TEST FAILURE ----->" + j);

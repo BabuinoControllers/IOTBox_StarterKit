@@ -66,7 +66,8 @@ public class TestKeyCounter001 {
                 //thisDevice = Device.discover(deviceId, Device.WIFI);
                 //IoStream.setActiveDevice(thisDevice);
             }
-        } catch (TestException | DiscoveryException e) {
+            superA.resetPin(superA);
+        } catch (TestException | DiscoveryException | CommandErrorException | IOException | ObjectException e) {
             thisUnit.testCompleted(false, "failure at test case " + j);
             Logger.detail("TEST FAILURE ----->" + j);
             Assertions.fail("TEST FAILURE ----->" + j);

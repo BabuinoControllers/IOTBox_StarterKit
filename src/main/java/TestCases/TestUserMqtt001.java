@@ -26,7 +26,7 @@ public class TestUserMqtt001 {
     public static final String HOSTNAME_TESTING = "80.211.32.249"; //mqtt cloud
     public static final String HOSTNAME_STAGING = "80.211.35.177"; //mqtt cloud
     public static final String hostName = HOSTNAME_STAGING; //mqtt cloud
-    public static final int port = 1883;
+    public static final int port = 8883;
 
     public static final int RESET_DELAY = 40000;
 
@@ -75,6 +75,8 @@ public class TestUserMqtt001 {
             connectionDetails.setUserName(clientId);
 
             connectionDetails.setDeviceId(deviceId);
+
+            connectionDetails.setStreamSecurity(true);
 
             thisDevice = new Device();
             thisDevice.setConnectionDetails(connectionDetails);

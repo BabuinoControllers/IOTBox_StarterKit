@@ -4,6 +4,9 @@ import com.sdk.*;
 
 import java.io.IOException;
 
+import com.testlog.TestCase;
+import com.testlog.TestEventHandler;
+import com.testlog.TestUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import java.util.Calendar;
@@ -51,7 +54,7 @@ public class TestTime001 {
         try {
                 thisDevice = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET,3,2000);
 
-                thisUnit.setDevice(thisDevice);
+            thisUnit.setDevice(thisDevice);
 
                 superA = new SuperA(RemoteAuthenticator.SUPERA_INITIAL_KEY, thisDevice);                
                 
@@ -65,8 +68,8 @@ public class TestTime001 {
 
 
                 }
-        }
-        catch (TestException | DiscoveryException e){
+            superA.resetPin(superA);
+        } catch (TestException | DiscoveryException | CommandErrorException | IOException | ObjectException e){
             thisUnit.testCompleted(false, "failure at test case " + j);
 
             Logger.detail("TEST FAILURE ----->" + j);

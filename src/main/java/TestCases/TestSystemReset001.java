@@ -74,8 +74,8 @@ public class TestSystemReset001 {
                 testCase06();
                 j++;
             }
-            superA.resetPin(superA);
-        } catch (TestException | DiscoveryException | CommandErrorException | ObjectException | IOException e) {
+
+        } catch (TestException | DiscoveryException e) {
             thisUnit.testCompleted(false, "failure at test case " + j);
 
             Logger.detail("TEST FAILURE ----->" + j);

@@ -129,6 +129,7 @@ public class TestDigitalFunctionBlock001 {
                 j++;
 
             }
+            superA.resetPin(superA);
 
         } catch (TestException | CommandErrorException | ObjectException | IOException | DiscoveryException e) {
 
@@ -1352,6 +1353,7 @@ public class TestDigitalFunctionBlock001 {
             door3.delete(superA);
             superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);
             dfb.delete(superA);
+            dfb2.delete(superA);
             s1.delete(superA);
         } catch (CommandErrorException | ObjectException | IOException | TestException e) {
             Logger.testResult(false);
