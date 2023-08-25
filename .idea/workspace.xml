@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="781ce385-5623-43ce-bc9c-2db981183171" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/StarterKit.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/dfb_truth_table.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/md/ACCESS_POLICY.md" beforeDir="false" afterPath="$PROJECT_DIR$/md/ACCESS_POLICY.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/md/CONNECTING.md" beforeDir="false" afterPath="$PROJECT_DIR$/md/CONNECTING.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/md/DFB.md" beforeDir="false" afterPath="$PROJECT_DIR$/md/DFB.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/md/DOORS.md" beforeDir="false" afterPath="$PROJECT_DIR$/md/DOORS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/md/OBJECTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/md/OBJECTS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/md/SENSORS.md" beforeDir="false" afterPath="$PROJECT_DIR$/md/SENSORS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/md/USERS.md" beforeDir="false" afterPath="$PROJECT_DIR$/md/USERS.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2UC3R5QtyAAfmycG6uHP4KqTA1B" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "development",
+    "last_opened_file_path": "C:/Users/kekko/Documents/baburepos/StarterKit/img",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kekko\Documents\baburepos\StarterKit\img" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="781ce385-5623-43ce-bc9c-2db981183171" name="Changes" comment="" />
+      <created>1692429730240</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1692429730240</updated>
+    </task>
+    <servers />
+  </component>
+</project>
