@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/IOTBrick_StarterKit.iml" filepath="$PROJECT_DIR$/IOTBrick_StarterKit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/StarterKit.iml" filepath="$PROJECT_DIR$/.idea/StarterKit.iml" />
     </modules>
   </component>
 </project>

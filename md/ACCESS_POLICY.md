@@ -1,6 +1,6 @@
 # Users in IOT Brick
 
-### Users remotly access device resources
+### Users remotely access device resources
 
 ---
 

@@ -4,97 +4,165 @@
 
 ---
 
-This is the starter kit of IOTBrick - BR001 the IOT solution that provides a general purpose secure unit that covers a wide range of applications. Starter kit
-is in java and includes software libraries as JAR files that simplifies the integration of IOT Brick devices in IOT applications. Starter Kit includes also an projects, library API specifications as javadoc and a datasheet of IOTBrick - BR001.
+Welcome to the Starter Kit for **IOT Brick - BR001**, the IOT solution that provides a general-purpose secure unit capable of a wide range of applications.  
+The Starter kit is an IntelliJ Java-11 project, which contains the following:
+- JAR library "SDK_IOTBrick.jar" for interacting with IOT Brick (see [Library](#library));
+- Javadoc for the SDK library;
+- Suite of hardware tests doubling as examples of SDK usage;
+- Datasheet of **IOT Brick - BR001**;
+- This Readme manual, with descriptions for every SDK component.
+
 
 ## About IOT Brick
-IOT Brick - BR001 is a secure unit designed as general-purpose IOT device by [Babuino Controllers](https://babuinocontrollers.com). It simplifies the design, the implementation and the deployment of IOT solutions on the field minimizing the time to market. IOT Brick do not implement application logic. Application logic shall be configured according to the application requirements just by connecting together several functional blocks. Functional blocks are basic blocks that transform inputs into outputs following specific configurable function. Connecting togheter the input and the output of functional blocks it is ipossible to implement a wide range of application logic.
-Without any hardware development and firmware programming it is possible to implement a large variety of applications and use cases just configuring the functional blocks provided by the device. So, development moves from hardware and firmware development to logic configuration.
-IOT Brick is a connected object that can be controlled remotely by any device or application including app on smartphone or other smart devices. Each unit comes with six configurable inputs and four outputs. Input can be configured to be analog and digital. Number of inputs and outputs can be extended by connecting additional units via RS485 and Ethernet. To simplify the integration in operating environment and applications an SDK (Software development kit) for desktop, server and mobile (Android and IOS) is available. 
-IOTBricks logic can also be changed when the device is deployed on the field just by sendind the device the new configuration.
-To buy IOT Brick device [contact us](https://www.babuinocontrollers.com/contacts/).
-More details about IOT BRick - BR001 are in the [datesheet](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/20210929_BR001V1_EN.pdf).
+**IOT Brick - BR001** is a secure unit designed as general-purpose IOT device by [Babuino Controllers](https://babuinocontrollers.com). It simplifies the design, the implementation and the deployment phases of IOT development, minimizing the time to market.
+
+IOT Brick does not come with any application logic on board, which shall be configured according to the user requirements by simply arranging the provided Functional Blocks. Connecting together the inputs and the outputs of several functional blocks, a wide range of application logic can be implemented, **without any hardware or firmware development efforts**. This allows to focus resources on the application logic itself.
+
+Each unit comes with six configurable  inputs (digital or analog) and four outputs (relay switches). Number of inputs and outputs can be extended by connecting additional units via RS485 or Ethernet.  
+It can communicate and receive commands from any online device application implementing the SDK (Software Development Kit), available for JVM devices (desktop, Android, server...) and Swift (iOS, MacOS).
+This also allows the device logic to be configured and/or changed remotely.
+
+To purchase the IOT Brick device [contact us](https://www.babuinocontrollers.com/contacts/).  
+More details about **IOT Brick - BR001** are in the [datasheet](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/20210929_BR001V1_EN.pdf).
 
 <p align="left">
   <br />
-  <img src="https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/img/IOT_Brick_BR001.jpg" width="500px" alt="IOT Brick Architecture" >
+  <img src="img/IOT_Brick_BR001.jpg" width="500px" alt="IOT Brick Architecture" >
   <br />
 </p>
 
+
 ## Why IOT Brick?
-Most IOT projects fails for many reasons: 
-- Businness objective not well designed
-- Technological complexity and missing know how
+Most IOT projects fail for similar reasons:
+- Business objective not well-designed
+- Technological complexity and lack of know-how
 - Development costs including hardware and software
 - Industrialization costs
 
-On the other side most of IOT projects share common requirements. IOT Brick technology try to share development, implementation and industrialization efforts of one projects with others by providing a general purpose device covering a wide range of applciations that can be simply integrated in complex IOT architecture.
+On the other side, most IOT projects share common requirements. IOT Brick technology aims to share development, implementation and industrialization efforts of one project with others by providing a general-purpose device covering a wide range of applications that can be simply integrated in complex IOT architecture.
 
 ## From Development to configuration
-Application logic can be easily implemented by configuring and combining the functional blocks into the device. Functional blocks are studied to support the implementation of a wide range of use cases and applications. Functional blocks have inputs and outputs. Logic is created by instantiating a functional block and connecting the output of a functional block to the input of the others. Several types of functional blocks are available. Follow a short summary:
 
-- [Sensor](md/SENSORS.md) block: used to read the value of an input or an output of the board or of others functional block. Input can be configured to read analog values (only from board input) and can implement a Schmitt Trigger whose thresholds are fully configurable. Sensor blocks can also be read remotely by users.
+Application logic can be easily implemented by configuring and combining these
+functional blocks into the device. These are the result of research aimed at
+supporting the widest possible range of use cases and applications.
 
-- [Switch](md/DOORS.md) block: it is a switch that can be controlled remotely by user. It can be configured as monostable (pulse) or bistable (on/off or toggle). Activation of the switch is conditional to a weekly time policy defined by administrator.
+Functional blocks have inputs and outputs. Logic is created by connecting the output of a functional block to the input of another. Several types of functional blocks are available:
 
-- [Door](md/DOORS.md) block: it is like a switch block but connected to relays driving device outputs. 
- 
-- Mealy Machine: finite State Machine based on a Mealy model with max 8 inputs, 4 outputs and 16 states. Activity of the machine can be conditioned by means of a weekly time policy defined by administrator. Outputs of the block can change its status only if the weekly time policy reports that the machine is active.
+- [Sensor](md/SENSORS.md) block: can read values from both the device’s inputs and the Functional Blocks’ inputs and outputs. Analog measurements are possible strictly from physical inputs, and may implement a Schmitt Trigger whose thresholds are fully configurable. Sensor blocks can also be read remotely by users.
 
-- [Digital Function Block](md/DFB.md): implementing any combinatory logic on 4 inputs. Output can be configured as monostable (Pulse) or bistable. Moreover, transition from one logical level to the other can be delayed by configuring the function block. Block is active conditionally to a weekly timed policy.
 
-- Weekly policy block: It defines a weekly time policy. Time policy is regulated by real time clock (RTC) operating in the board. Some of the functional block activities are regulated by the weekly time policy. Access control policy has a validity time defined by a starting time and an expiration time. Group access policy can be defined per user.
+- [Switch](md/DOORS.md) block: a switch Users may control remotely. It may be configured as either monostable (trigger/pulse) or bistable (on-off), and may implement further security measures such as PIN or Biometric (to be implemented client-side). Activation of a switch is conditional to a weekly time policy defined by the administrator.
+
+- [Door](md/DOORS.md) block: a special type of Switch block, which controls the state of one of the four on-board relay switches.
+
+
+- Mealy Machine: Implements a Mealy-based finite state machine with up to 8 inputs, 4 outputs, and 16 states. The machine's activity (including output variations) is subject to a weekly time policy defined by the administrator.
+
+
+- [Digital Function Block](md/DFB.md):
+  can implement any combinatory logic on 4 inputs and 1 output, and offers configurable outputs as monostable or bistable. The logic is set via a 4-digits hex string which represents the output column of the truth table of the desired logical function’s truth table. Transition delays between logical levels can be set. The block's activation is subject to a weekly time policy.
+
+
+- [Weekly policy](md/ACCESS_POLICY.md) block: It defines a weekly time policy. Time policy is regulated by real time clock (RTC) operating in the board. Some of the functional block activities are regulated by the weekly time policy. Access control policy has a validity time defined by a starting time and an expiration time. Group access policy can be defined per user.
+
 
 <p align="center">
   <br />
-  <img src="https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/img/IOT_Brick_Architecture.png" width="800px" alt="IOT Brick Architecture" >
+  <img src="/img/IOT_Brick_Architecture.png" width="800px" alt="IOT Brick Architecture" >
   <br />
 </p>
 
 ## How to start
-Starter kit includes a project for Intellij. So install Intellij before starting.
-After just clone locally latest stable version of the Starter Kit Project, launch the IDE and open the project. Project shall be compiled with Java 8.
-Power on IOT Brick - BR001 and connect to the lan. Ethernet led start blinking. Also device system blu led start blinking reporting activity of device. If the network is connected to the internet the blue led should alternate two fast blink to a long pasue. This means that the device is connected to the server.
-Note: it is not mandatory required that the device connect to the server. Device can also controllerd over the LAN.
+Clone locally the latest stable version of the Starter Kit, launch your IntelliJ IDE and open the project. Target JDK is Java-11.
+Power on **IOT Brick - BR001** and connect to LAN. The Ethernet status LEDs and the device activity blue LED should start blinking. If the device is connected to the internet and is able to communicate with the server, the blue LED should alternate two fast blinks to a long pause.
+Note: it is not required that the device connects to the server, as it can also be controlled over LAN.
 
-There is no need to configure any IP address. The device implements a discovery protocol that allow applications to discover devices connected to the network. Only configuration required is to copy in the main file the serial number of the device and the initial password of the device.
+There is no need to configure any IP address. The device implements a discovery protocol that allows applications to discover devices connected to the network. The only configuration required is to use the Serial Number and the initial password for the device in the [Connection](#connecting-to-iot-brick) phase. In order to execute the provided tests, these parameters shall be copied to [TestMain.java](src/main/java/MainTest/TestMain.java)
 
 ## System Reset and Factory Reset
-Device has a factory rest. Pressing reset button for more than 5s cause a system reset. Pressing for more than 15s cause a factory reset. Factory reset delete all the information from the non-volatile memory of the device.
+Pressing the reset button for at least 5s causes a **system reset** (restart). 
+Pressing for longer than 15s causes a **factory reset**, which erases all the information from the non-volatile memory of the device including logic configuration and users.
 
 ## Library
-Library as JAR file are in the library folder. Library provides a cohmprensive set of objects that mirrors objects in the device. By interacting with these objects it is possible to interact remotely with the device.
-To use the library in a new project just import the JAR file in the project and start developing code. Download the [JAR File from this link](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/lib/SDK_IOTBrick.jar)
+The **IOT Brick SDK Library** provides a comprehensive set of [objects](#objects) that mirror objects in the device. By interacting with these objects it is possible to interact remotely with the device.
+The library is available in a Maven repository stored as [branch to the Starter Kit](https://www.github.com/BabuinoControllers/IOTBrick_StarterKit/tree/mvn-repo). It can be easily implemented as dependency for Maven or Gradle:
+### Maven
+```
+// pom.xml
 
-Library can be easly included also in Android Projects. If you need library for IOS device please [reach out](https://www.babuinocontrollers.com/contacts/).
+<repositories>
+  [...]
+  <repository>
+    <id>SDK_IOTBrick_repo</id>
+    <url>https://raw.githubusercontent.com/BabuinoControllers/IOTBrick_StarterKit/mvn-repo/</url>
+  </repository>
+</repositories>
 
-Java doc is available [here](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/javadoc.zip).
+<dependencies>
+  [...]
+  <dependency>
+    <groupId>com.babuino</groupId>
+    <artifactId>SDK_IOTBrick</groupId>
+    <version>4.1.0</version>
+  </dependency>
+</dependencies>
+```
 
+### Gradle
+```
+// top-level build.gradle
+buildscript{
+  [...]
+  repositories{
+    [...]
+    maven{
+      url 'https://raw.githubusercontent.com/BabuinoControllers/IOTBrick_StarterKit/mvn-repo/'
+      name 'SDK_IOTBrick_repo'
+      }
+  }
+}
+```
+```
+// (:app) build.gradle
+dependencies{
+  [...]
+  implementation 'com.babuino.SDK_IOTBrick:SDK_IOTBrick:4.1.0'
+}
+```
+
+### Javadoc
+Javadoc is available [here](https://github.com/BabuinoControllers/IOTBrick_StarterKit/raw/main/doc/javadoc.zip).
+
+### Swift library
+The SDK Library is also available in Swift for Apple devices (iOS, MacOS). If you need it,  please [reach out](https://www.babuinocontrollers.com/contacts/).
+
+---
 ## Objects
-On IOT Brick everything is an [object](md/OBJECT.md). Users are objects, digital funcion blocks are object, device itself is considered as an object. Objects share some common behaviour.
+On IOT Brick everything is an [object](md/OBJECT.md). Users are objects, functional blocks are objects, the device itself is considered an object. Objects share some common behaviour.
 
 [Learn more about objects.](md/OBJECTS.md)
 
 ## Users
-Users can monitor remotely the application and perform actions. Before any command sent by user is executed user is authenticated. Only authenticated users can perform an action. User authentication is based on a key and additionally for some blocks like switch block or door block also by means of a PIN.
+Users can remotely monitor the application and perform actions. Before any command sent by the User is executed, they must be authenticated (see [Security](#security).)
+
 Three different roles can be assigned to users:
-- Super Administrator with full access to all the features of the device including hardware
-settings and log analysis.
+- **Super Administrator** has full access to all the features of the device, including hardware settings, log analysis and application logic configuration.
 
-- Administrator able to create, delete users and define access policies.
+- **Administrator** is able to create and delete users, and define access policies.
 
-- User allowed to open close the output based on the policy defined by the administrators.
+- **User** is allowed to trigger Switches/Doors based on the policy defined by the administrators.
 
-On average 250 users can be registered with the system, Effective number of users depends on the settings. Each user has its own key used to guarantee end to end security.
+On average, 250 users can be registered with the system, Effective number of users depends on the settings. Each user has its own key which guarantees end-to-end security.
 
 [Here find more about users.](md/USERS.md)
 
-## Connecting to IOTBrick
+## Connecting to IOT Brick
 [Here find more about connecting users.](md/CONNECTING.md)
 
 ## Security
-Communication between devices and administrator/user entities is protected by end-to-end security. Communication protocol creates a secure tunnel between users and Iot Brick that protect exchanged data guaranteeing authenticity confidentiality and integrity. User are authenticated at each and every command by the end-to-end protocol. For some specific commands it is possible to enforce an additional level of user authentication through a PIN.
+Communication between Devices and User entities is protected by end-to-end security. The communication protocol creates a secure tunnel between Users and IOT Brick that protect exchanged data, guaranteeing authenticity, confidentiality, and integrity. Users are authenticated at each and every command through the end-to-end protocol. On top of that, for some commands and blocks such as Doors or Switches it is possible to enforce an additional level of user authentication through a PIN.
 
 ## Troubleshooting
 
-Please [reach out](https://www.babuinocontrollers.com/contacts/) to the Babuino Controllers team with any technical issues or questions about the Github integration. We're happy to help!
+Please [reach out](https://www.babuinocontrollers.com/contacts/) to the Babuino Controllers team for any technical issues or questions about the GitHub integration. We're happy to help!
