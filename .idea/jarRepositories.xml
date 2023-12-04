@@ -16,5 +16,10 @@
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="redhat-ga-repository" />
+      <option name="name" value="Red Hat GA repository" />
+      <option name="url" value="http://maven.repository.redhat.com/ga/" />
+    </remote-repository>
   </component>
 </project>
