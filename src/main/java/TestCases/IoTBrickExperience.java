@@ -55,35 +55,15 @@ public class IoTBrickExperience {
         j = 1;
         try {
 
-            ConnectionDetailsMqtt connectionDetails = new ConnectionDetailsMqtt();
-
-            connectionDetails.setBearer(ConnectionDetailsMqtt.BEARER_MQTT_OVER_ETHERNET);
-
-            connectionDetails.setClientId(clientId);
-
-            connectionDetails.setHostName(hostName);
-            connectionDetails.setPort(port);
-
-            connectionDetails.setKeepAliveTime(60000);
-
-            connectionDetails.setPassword("111");
-            connectionDetails.setUserName(clientId);
-
-            connectionDetails.setDeviceId(deviceId);
-
-            connectionDetails.setStreamSecurity(true);
-
-            thisDevice = new Device();
-            thisDevice.setConnectionDetails(connectionDetails);
+            thisDevice = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET, 3, 2000);
+            thisUnit.setDevice(thisDevice);
             superA = new User(User.SUPER_ADM_ID, RemoteAuthenticator.SUPERA_INITIAL_KEY, thisDevice);
-
-            thisDevice.startCommandSession();
 
             thisUnit.setDevice(thisDevice);
 
             for (int u = 0; u < 1; u++) {
 
-           //     ledExperience();
+                ledExperience();
                 j++;
 
             //   telemetryExperience();
@@ -92,11 +72,11 @@ public class IoTBrickExperience {
           //      vitalExperience();
                 j++;
 
-                resetToFactorySetting();
+          //      resetToFactorySetting();
             }
 
 
-        } catch (TestException | IOException e) {
+        } catch (TestException  | DiscoveryException e) {
             Logger.detail("TEST FAILURE ----->" + j);
             thisUnit.testCompleted(false, "failure at test case " + j);
 
