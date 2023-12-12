@@ -9,8 +9,5 @@
         <module name="IOTBrick_StarterKit" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="IOTBrick_StarterKit" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>

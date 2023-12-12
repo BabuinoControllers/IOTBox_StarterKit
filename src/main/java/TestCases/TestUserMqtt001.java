@@ -1,4 +1,5 @@
 package TestCases;
+
 import com.sdk.*;
 
 
@@ -18,14 +19,16 @@ public class TestUserMqtt001 {
 //     ********************************/
     public static final String testBatch = "TestUserMQTT001";
     public static final String deviceId = MainTest.TestMain.deviceId;
-    public static final String clientId = "3333333333";
+
+    public static final String password = "111";
+    public static final String clientId = "00000022";
 
     //public static final String hostName =  "54.76.137.235"; //mqtt cloud
     // public static final int port =  18223; // mqtt cloud
 
     public static final String HOSTNAME_TESTING = "80.211.32.249"; //mqtt cloud
     public static final String HOSTNAME_STAGING = "80.211.35.177"; //mqtt cloud
-    public static final String hostName = HOSTNAME_STAGING; //mqtt cloud
+    public static final String hostName = HOSTNAME_TESTING; //mqtt cloud
     public static final int port = 8883;
 
     public static final int RESET_DELAY = 40000;

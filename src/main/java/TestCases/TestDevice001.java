@@ -1,4 +1,5 @@
 package TestCases;
+
 import com.sdk.*;
 
 
@@ -373,7 +374,7 @@ public class TestDevice001 {
     --------------------------------------------------------------------------
     AUTHOR:	PDI
 
-    DESCRIPTION: Administrators and users can not syncronyze device data
+    DESCRIPTION: Administrators and users can not synchronize device data
 
     Security Level: None
 
@@ -655,6 +656,13 @@ public class TestDevice001 {
 
             thisDevice.setMqttStatus(superA, Device.MQTT_STATUS_DISABLED, pin);
 
+            // wait;
+            try {
+                Thread.sleep(30000);
+            } catch (InterruptedException ignored) {
+            }
+            thisDevice.ping();
+            superA.syncroFields();
             thisDevice.syncronizeSystemParameters(superA);
 
             a = thisDevice.getMqttStatus();
@@ -666,6 +674,12 @@ public class TestDevice001 {
             //#
 
             thisDevice.setMqttStatus(superA, Device.MQTT_STATUS_ENABLED, pin);
+
+            // wait;
+            try {
+                Thread.sleep(30000);
+            } catch (InterruptedException ignored) {
+            }
 
             thisDevice.syncronizeSystemParameters(superA);
 
@@ -765,7 +779,7 @@ public class TestDevice001 {
             // create the apdu object
             apdu = new Apdu(Apdu.PUT_DATA_SET_SYSTEM_DATA_APDU);
             apdu.addTlv(Apdu.DATA_TAG_PIN_DATA, "01010101");
-            apdu.addTlv(Apdu.DATA_MQTT_STATUS, Device.MQTT_STATUS_DISABLED);
+            apdu.addTlv(Apdu.DATA_TAG_MQTT_STATUS, Device.MQTT_STATUS_DISABLED);
 
             // set the expected result and send the command;              
             expectedRes = String.format("%02X", Atlv.DATA_TAG_RESPONSE) + "1A" +

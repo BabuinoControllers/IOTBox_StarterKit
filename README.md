@@ -103,8 +103,8 @@ The library is available in a Maven repository stored as [branch to the Starter 
   [...]
   <dependency>
     <groupId>com.babuino</groupId>
-    <artifactId>SDK_IOTBrick</groupId>
-    <version>4.1.0</version>
+    <artifactId>SDK_IOTBrick</artifactId>
+    <version>5.0.0</version>
   </dependency>
 </dependencies>
 ```
@@ -127,7 +127,7 @@ buildscript{
 // (:app) build.gradle
 dependencies{
   [...]
-  implementation 'com.babuino.SDK_IOTBrick:SDK_IOTBrick:4.1.0'
+  implementation 'com.babuino.SDK_IOTBrick:SDK_IOTBrick:5.0.0'
 }
 ```
 

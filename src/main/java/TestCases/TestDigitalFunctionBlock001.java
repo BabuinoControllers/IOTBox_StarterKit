@@ -1,4 +1,5 @@
 package TestCases;
+
 import com.sdk.*;
 
 
@@ -2391,9 +2392,29 @@ public class TestDigitalFunctionBlock001 {
 //#
 //# Pulse generator with on delay and off delay
 //#
-            Logger.detail("------------ Pulse generator wirh on delay and off delay ------------");
+            Logger.detail("------------ Pulse generator with on delay and off delay ------------");
 
             String a = s1.getMeasure(superA);
+
+
+                // at this point we do not know the value of the output
+                // in case it is on we just wait and syncro
+            if (0 == a.compareTo(Sensor.SENSOR_VALUE_ON)){
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException ignored) {
+                }
+            }
+
+            if (0 != a.compareTo(Sensor.SENSOR_VALUE_OFF))
+                throw new TestException();
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException ignored) {
+            }
+
+            a = s1.getMeasure(superA);
+
             if (0 != a.compareTo(Sensor.SENSOR_VALUE_ON))
                 throw new TestException();
             try {
