@@ -14,11 +14,11 @@ public class TestMain {
 
     // IMPORTANT
     // Copy serial number of your device here
-    public static String deviceId = "000000000000100A";
+    public static String deviceId = "0000000000001001";
 
     public static void main(String[] args) {
 
-        new TestHelloWord001().run();
+        new IoTBrickExperience().run();
 
 
         // Uncomment to run other examples
