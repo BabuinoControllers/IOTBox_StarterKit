@@ -14,7 +14,7 @@ public class TestMain {
 
     // IMPORTANT
     // Copy serial number of your device here
-    public static String deviceId = "0000000000001001";
+    public static String deviceId = "0000000000000B00";
 
     public static void main(String[] args) {
 

@@ -1,4 +1,5 @@
 package TestCases;
+
 import com.sdk.*;
 
 
@@ -54,11 +55,11 @@ public class TestDiscovery001 {
 
         j = 1;
         try {
-            thisDevice = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET, 3, 2000);
-
-            thisUnit.setDevice(thisDevice);
-
-            superA = new User(User.SUPER_ADM_ID, RemoteAuthenticator.SUPERA_INITIAL_KEY, thisDevice);
+//            thisDevice = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET, 3, 2000);
+//
+//            thisUnit.setDevice(thisDevice);
+//
+//            superA = new User(User.SUPER_ADM_ID, RemoteAuthenticator.SUPERA_INITIAL_KEY, thisDevice);
 
             testCase01(); // ETHERNET
             j++;
@@ -81,8 +82,7 @@ public class TestDiscovery001 {
 
             testCase01();
             j++;
-            superA.resetPin(superA);
-        } catch (TestException | DiscoveryException | CommandErrorException | IOException | ObjectException e) {
+        } catch (TestException e) {
             thisUnit.testCompleted(false, "failure at test case " + j);
 
             Logger.detail("TEST FAILURE ----->" + j);
@@ -91,7 +91,6 @@ public class TestDiscovery001 {
         }
         thisUnit.testCompleted(true, "success!");
 
-        Logger.detail("OK");
         Logger.detail("OK");
     }
 
@@ -125,16 +124,16 @@ Security Level: None
             //# After discovery it is possible to send commands to the card via ethernet.
             //#
             Logger.testCase("Test Discovery request over the ethernet");
-
+            Device d = new Device();
             try {
-                Device d = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET, 3, 2000);
+                d = Device.discover(deviceId, ConnectionDetails.BEARER_ETHERNET, 3, 2000);
 
                 superA = new User(User.SUPER_ADM_ID, RemoteAuthenticator.SUPERA_INITIAL_KEY, d);
             } catch (DiscoveryException ignored) {
             }
 
             // launch a ping
-            thisDevice.ping();
+            d.ping();
 
             // Super A object personalization
             superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);
@@ -152,6 +151,7 @@ Security Level: None
             //#
             admin.delete(superA);
             superA.updateKey(RemoteAuthenticator.SUPERA_INITIAL_KEY);
+            superA.resetPin(superA);
 
         } catch (CommandErrorException | ObjectException | IOException e) {
             Logger.testResult(false);

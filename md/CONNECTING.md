@@ -1,20 +1,20 @@
 # Connecting to IOT Brick
 
-### Users remotly access device resources
+### Simple device discovery through LAN or WAN
 
 ---
 
-IOT Brick Users remotely access device resources through LAN or WAN connectivity. Based on their role, users can perform administrative actions like create, update or delete users, manages policies, assign rights, configure the device logic and delete objects instance on the device. Moreover Users can read value measured by sensors and can activate or deactivate a switch.
 
 ## Discovery Protocol
-IOT Brick implements a discovery protocol that allows applicaiton to discover connected devices. There is no need to configure an IP address in IOT Brick devices. Only information required to connect to a device is a its serial number. A serial number is an hext string of 32.
+IOT Brick implements a discovery protocol that allows applications to discover connected devices. There is no need to configure any IP address. The only information required to connect to a device is its serial number. A serial number is a 16-digit HEX string.
 
-To discover a device over the network use the following commands. This command tries to discover the device with given serial number over the ethernet bearer. In case first attempt fails the command retries to discover the device for three times after 2s each.
+## Local Network Discovery
+To discover a device over a local network, use the following command. This command tries to discover the device with given serial number over the ethernet bearer. In case first attempt fails, the command retries to discover the device for 3 times after 2s (2000 ms) each.
 ```
 	Device thisDevice = Device.discover(serialNumber, ConnectionDetails.BEARER_ETHERNET,3,2000); 
 ```
 ## Local Network Scan
-In order to identify all IOT Brick devices connected to the network it is possible to launch a generic network discover. It returns the list of all devices connected over the network.
+In order to identify all IOT Brick devices connected to the local network it is possible to launch a generic network discover. It returns the list of all devices connected to the local network.
 
 ```
 	Device.discover(timeout_ms)
@@ -29,7 +29,7 @@ Ping is used to check if a device is connected to the bearer. Ping allows to ref
 Ping command works for local connection and wan connection as well.
 
 ## User Connection
-An user that want to connect with a device shall first extabilish a connection with it. So first device instance shall be discovered and after user instance shall be created.
+An application that wants to interact with a device shall first establish a connection with it. So first a device instance shall be discovered, then a User instance shall be synchronized, which can be used to interact with the device.
 
 ```
 		// Discover the device and perform first connection
